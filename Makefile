@@ -3,7 +3,7 @@
 
 NAME = cub3d
 
-SRC = cub3d.c
+SRC = cub3d.c quarters.c
 
 SRCO = $(SRC:.c=.o)
 

@@ -4,6 +4,7 @@
 #ifndef CUB3D_CUB3D_H
 # define CUB3D_CUB3D_H
 # define M_PI_6 M_PI_2/3
+# define M_PI_3 M_PI/3
 
 # include "math.h"
 
@@ -22,6 +23,9 @@ typedef struct  s_calc {
 
 	double 		min_len;
 	double 		dis_to_proj;
+	double		dis_x;
+    double		dis_y;
+	double		dis;
 }               t_calc;
 
 typedef struct  s_data {
@@ -51,5 +55,6 @@ typedef struct  s_data {
 void 	draw_wall(t_data *img);
 void	draw_map2d(t_data *img);
 void    quarters_horz(t_data *img);
+void    quarters_vert(t_data *img);
 
 #endif

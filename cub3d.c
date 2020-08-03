@@ -103,54 +103,109 @@ void	check_player_sight(t_data *img)
 	}
 }
 
+/* void    quarters_vert(t_data *img)
+{
+    if (img->player.ang_start <= (M_PI + M_PI_2) && img->player.ang_start >= M_PI_2)
+        img->x -= img->cube_size;
+    else
+       img->x += img->cube_size;
+
+    if (img->player.ang_start < M_PI_2 && img->player.ang_start > (M_PI_2 + M_PI))
+        img->y += img->cube_size / tan(img->player.ang_start);
+    else if (img->player.ang_start == M_PI || img->player.ang_start == 0)
+        img->y = img->y;
+    else
+        img->y -= img->cube_size / tan(img->player.ang_start);
+}
+
+void    quarters_horz(t_data *img)
+{
+    if (img->player.ang_start >= 0 && img->player.ang_start <= M_PI)
+        img->y += img->cube_size;
+    else
+        img->y -= img->cube_size;
+
+    if (img->player.ang_start < M_PI_2 && img->player.ang_start > (M_PI_2 + M_PI))
+        img->x += img->cube_size / tan(img->player.ang_start);
+    else if (img->player.ang_start == (M_PI_2 + M_PI) || img->player.ang_start == M_PI_2)
+        img->x = img->x;
+    else
+        img->x -= img->cube_size / tan(img->player.ang_start);
+}
+ */
+
 double 		min_length(double x, double y)
 {
-	if (x >= y)
-		return (x);
-	else
+	if (x > y)
 		return (y);
+	else
+		return (x);
 }
 
 double		find_horizontal(t_data *img)
 {
 	double	horz_y;
 	double	horz_x;
-	double	dis;
-	double	dis_x;
 
 	img->y = (int)(img->player.y / img->cube_size) * img->cube_size - 1;
-	dis = img->player.y - img->y;
-	dis_x = dis / tan(img->player.ang_start); // * tan(img->player.ang_start); // ang ?????????????????? 
-	img->x = img->player.x - dis_x;
+	
+	if (img->player.ang_start >= M_PI && img->player.ang_start <= (M_PI * 2))
+		img->calc.dis_y = img->player.y - img->y;
+	else
+		img->calc.dis_y = img->y - img->player.y;
+
+	img->calc.dis_x = img->calc.dis_y / tan(img->player.ang_start); // * tan(img->player.ang_start); // ang ?????????????????? 
+	
+	if (img->player.ang_start <= (M_PI + M_PI_2) && img->player.ang_start >= M_PI_2)
+		img->x = img->player.x - img->calc.dis_x;
+	else
+		img->x = img->calc.dis_x + img->player.x;
 	while (img->map[(unsigned int)(img->y/img->cube_size)][(unsigned int)(img->x/img->cube_size)] != '1')
-	{
-		img->y -= img->cube_size;
-		img->x -= img->cube_size / tan(img->player.ang_start);
-	}
+		quarters_horz(img);
+
 	horz_y = img->player.y - img->y;
 	horz_x = img->player.x - img->x;
-	dis = pow(horz_x, 2) + pow(horz_y, 2);
-	return (sqrt(dis));
+	img->calc.dis = pow(horz_x, 2) + pow(horz_y, 2);
+
+	return (sqrt(img->calc.dis));
 }
 
 double 		find_vertical(t_data *img)
 {
-	double	horz_y;
-	double	horz_x;
-	double	dis;
+	double	vert_y;
+	double	vert_x;
 
-	img->x = (int)(img->player.x / img->cube_size) * img->cube_size - 1;
-	dis = img->player.x - img->x;
-	img->y = dis / tan(img->player.ang_start); // ang ????????????
-	while (img->map[(unsigned int)img->y/img->cube_size][(unsigned int)img->x/img->cube_size] != '1')
+	if (img->player.ang_start < (M_PI + M_PI_2) && img->player.ang_start > M_PI_2)
+		img->x = (int)(img->player.x / img->cube_size) * img->cube_size - 1;
+	else if (img->player.ang_start == (M_PI + M_PI_2) && img->player.ang_start == M_PI_2)
+		img->x = (int)(img->player.x / img->cube_size) * img->cube_size;
+	else
+		img->x = (int)(img->player.x / img->cube_size) * img->cube_size + img->cube_size;
+
+	if (img->player.ang_start <= (M_PI + M_PI_2) && img->player.ang_start >= M_PI_2)
+		img->calc.dis_x = img->player.x - img->x;
+	else
+		img->calc.dis_x = img->x - img->player.x;
+
+	img->calc.dis_y = img->calc.dis_x * tan(img->player.ang_start);
+
+	if (img->player.ang_start <= (M_PI * 2) && img->player.ang_start >= M_PI)
+		img->y = img->player.y - img->calc.dis_y; // ang ????????????
+	else
+		img->y = img->player.y + img->calc.dis_y;
+
+	img->calc.dis = 0;
+	while (img->y > 0 && img->x > 0 && vert_y > 0 && vert_x > 0 && img->map[(unsigned int)img->y/img->cube_size][(unsigned int)img->x/img->cube_size] != '1')
 	{
-		img->x += img->cube_size;
-		img->y += img->cube_size / tan(img->player.ang_start);
+		quarters_vert(img);
+		vert_y = img->player.y - img->y;
+		vert_x = img->player.x - img->x;
+		img->calc.dis = pow(vert_x, 2) + pow(vert_y, 2);
 	}
-	horz_y = img->player.y - img->y;
-	horz_x = img->player.x - img->x;
-	dis = pow(horz_x, 2) + pow(horz_y, 2);
-	return (sqrt(dis));
+	if (img->calc.dis)
+		return (sqrt(img->calc.dis));
+	else
+		return (INFINITY);
 }
 
 void 	tracer(t_data *img)
@@ -174,8 +229,11 @@ void 	draw_wall(t_data *img)
 	obj_h = (img->calc.dis_to_proj / (img->calc.min_len * img->cube_size)) * img->height;
 	obj_start = (img->height / 2) - (obj_h / 2);
 	obj_end = (img->height / 2) + (obj_h / 2);
-
-	while (obj_start < obj_end)
+	if (obj_end > img->height)
+		obj_end = img->height;
+	if (obj_start < 0)
+		obj_start = 0;
+	while (obj_start < obj_end - 1)
 	{
 		my_mlx_pixel_put(img, img->pixel, obj_start, 0x00FF0000);
 		obj_start++;
@@ -192,9 +250,8 @@ void 	func(t_data *img)
 	img->img = mlx_new_image(img->mlx, 1920 , 1080);
 	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel, &img->line_length , &img->endian);
 
-	img->calc.dis_to_proj = (img->width / 2) / tan(M_PI_2 / 3);
-	check_player_sight(img);
-	ang_step = M_PI_6 / img->width;
+	img->calc.dis_to_proj = (img->width / 2) / tan(M_PI_6);
+	ang_step = M_PI_3 / img->width;
 	img->player.ang_start = img->player.angle - M_PI_6;
 	img->player.ang_end = img->player.angle + M_PI_6;
 
@@ -208,6 +265,8 @@ void 	func(t_data *img)
 		img->pixel = count;
 		tracer(img);
 		img->player.ang_start += ang_step;
+		if (img->player.ang_start > (M_PI * 2))
+			img->player.ang_start = 0 + ang_step;
 		count++;
 	}
 	mlx_put_image_to_window(img->mlx, img->mlx_win, img->img, 0, 0);
@@ -297,31 +356,35 @@ void	draw_map2d(t_data *img)
 		count_y += 32;
 		i++;
 	}
-}
+}*/
 
-int 	key(int keycode, t_data *img) {
-
+int 	key(int keycode, t_data *img) 
+{
+	mlx_clear_window(img->mlx, img->mlx_win);
 	if (keycode == 126) // up
 	{
-		img->player.y -= img->speed;
+		img->player.y += 5 * sin(img->player.angle);
+		img->player.x += 5 * cos(img->player.angle);
 	}
 	else if (keycode == 125) // down
 	{
-		img->player.y += img->speed;
+		img->player.y -= sin(img->player.angle);
+		img->player.x -= cos(img->player.angle);
 	}
 	else if (keycode == 124) // right
 	{
-		img->player.x += img->speed;
+		img->player.angle += 0.1;
 	}
 	else if (keycode == 123) // left
 	{
-		img->player.x -= img->speed;
+		img->player.angle -= 0.1;
 	}
 	mlx_destroy_image(img->mlx, img->img);
-	draw_map_player(img);
+	//draw_map_player(img);
+	func(img);
 	return (1);
 }
-*/
+
 
 int		main()
 {
@@ -340,10 +403,11 @@ int		main()
 	img.mlx_win = mlx_new_window(img.mlx, img.width, img.height, "Cub3d - drina");
 
 	img.map = parse_map();
+	check_player_sight(&img);
 	func(&img);
 	//draw_map_player(&img);
 
-	//mlx_hook(img.mlx_win, 2, 0L, &key, &img);
+	mlx_hook(img.mlx_win, 2, 1L, &key, &img);
 	mlx_loop(img.mlx);
 	return (0);
 }
