@@ -40,8 +40,8 @@ typedef struct  s_data {
 	void 		*mlx_win;
 	double 		x;
 	double 		y;
-	double 		width;
-	double 		height;
+	int 		width;
+	int 		height;
 	int 		pixel;
 	int			vert;
 	int			horz;
@@ -56,5 +56,8 @@ void 	draw_wall(t_data *img);
 void	draw_map2d(t_data *img);
 void    quarters_horz(t_data *img);
 void    quarters_vert(t_data *img);
-
+void 	draw_map_player(t_data *img);
+void 	draw_floor(t_data *img, int obj_start);
+void 	draw_sky(t_data *img, int obj_start);
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 #endif

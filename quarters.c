@@ -12,48 +12,52 @@
 
 #include "cub3d.h"
 
-
-
 void    quarters_horz(t_data *img)
 {
-    if (img->player.ang_start >= 0 && img->player.ang_start <= M_PI)
+    if (img->player.ang_start > 0 && img->player.ang_start < M_PI)
         img->y += img->cube_size;
     else
         img->y -= img->cube_size;
 
-    if (img->player.ang_start < M_PI_2 && img->player.ang_start > (M_PI_2 + M_PI))
+    if (img->player.ang_start > M_PI_2 && img->player.ang_start < (M_PI_2 + M_PI))
     {
-        img->x += img->cube_size / tan(img->player.ang_start);
-    
-    
+        if (img->player.ang_start < (M_PI + M_PI_2) && img->player.ang_start > M_PI)
+            img->x -= img->cube_size * tan((M_PI + M_PI_2) - img->player.ang_start); //+
+        else 
+            img->x -= img->cube_size * tan(img->player.ang_start - M_PI_2); //+
     }
     else if (img->player.ang_start == (M_PI_2 + M_PI) || img->player.ang_start == M_PI_2)
         img->x = img->x;
     else
-        img->x -= img->cube_size / tan(img->player.ang_start);
+    {
+        if (img->player.ang_start > 0 && img->player.ang_start < M_PI_2)
+            img->x += img->cube_size * tan(M_PI_2 - img->player.ang_start); //+
+        else
+            img->x += img->cube_size * tan(img->player.ang_start - (M_PI + M_PI_2)); //+
+    }
 }
 
 void    quarters_vert(t_data *img)
 {
     if (img->player.ang_start < (M_PI + M_PI_2) && img->player.ang_start > M_PI_2)
         img->x -= img->cube_size;
-    else if (img->player.ang_start > (M_PI + M_PI_2) && img->player.ang_start < M_PI_2)
+    else
        img->x += img->cube_size;
 
     if (img->player.ang_start > M_PI && img->player.ang_start < (2 * M_PI))
     {
         if (img->player.ang_start > M_PI && img->player.ang_start < (M_PI + M_PI_2))
-            img->y -= img->cube_size / -tan(img->player.ang_start);
+            img->y -= img->cube_size * tan(img->player.ang_start - M_PI); //+
         else
-            img->y -= img->cube_size / tan(img->player.ang_start);
+            img->y -= img->cube_size * tan(2 * M_PI - img->player.ang_start); //+
     }
-    else if (img->player.ang_start == M_PI || img->player.ang_start == 0)
-        img->y = img->y;
+    else if (img->player.ang_start == (M_PI * 2) || img->player.ang_start == M_PI || img->player.ang_start == 0)
+		img->y = img->y;
     else
     {
         if (img->player.ang_start < M_PI_2 && img->player.ang_start > 0)
-            img->y += img->cube_size / -tan(img->player.ang_start);
+            img->y += img->cube_size * tan(img->player.ang_start); //+
         else
-            img->y += img->cube_size / tan(img->player.ang_start);
+            img->y += img->cube_size * tan(M_PI - img->player.ang_start); //+
     }
 }
