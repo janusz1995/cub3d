@@ -8,6 +8,24 @@
 
 # include "math.h"
 
+typedef struct		s_sprites
+{
+	int					x;
+	int					y;
+	int 				len;
+	struct s_sprites	*next;
+}					t_sprites;
+
+typedef struct  s_flags {
+
+	int 		north;
+	int 		south;
+	int 		east;
+	int 		west;
+	int 		horz;
+	int 		vert;
+}               t_flags;
+
 typedef struct  s_player {
 
 	double 		x;
@@ -19,6 +37,17 @@ typedef struct  s_player {
 
 }               t_player;
 
+typedef struct  s_textures {
+
+	void 		*txt;
+	int 		height;
+	int 		width;
+	int			*addr;
+	int         bits_per_pixel;
+	int         line_length;
+	int         endian;
+}               t_textures;
+
 typedef struct  s_calc {
 
 	double 		min_len;
@@ -26,6 +55,7 @@ typedef struct  s_calc {
 	double		dis_x;
     double		dis_y;
 	double		dis;
+	double 		x_or_y;
 }               t_calc;
 
 typedef struct  s_data {
@@ -43,15 +73,27 @@ typedef struct  s_data {
 	int 		width;
 	int 		height;
 	int 		pixel;
-	int			vert;
-	int			horz;
+	int 		vert;
+	int 		horz;
+	double		vert_x;
+	double		vert_y;
+	double		horz_x;
+	double		horz_y;
 	int			color;
 	int 		speed;
 	int 		cube_size;
 	t_player 	player;
 	t_calc		calc;
+	t_textures	txt1;
+	t_textures	txt2;
+	t_textures	txt3;
+	t_textures	txt4;
+	t_textures	sprite;
+	t_flags		flag;
+	t_sprites 	*sprites;
 }               t_data;
 
+void 	clear_flags(t_data *img);
 void 	draw_wall(t_data *img);
 void	draw_map2d(t_data *img);
 void    quarters_horz(t_data *img);
@@ -60,4 +102,5 @@ void 	draw_map_player(t_data *img);
 void 	draw_floor(t_data *img, int obj_start);
 void 	draw_sky(t_data *img, int obj_start);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+
 #endif

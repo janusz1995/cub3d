@@ -18,6 +18,61 @@ void            my_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 /// Split 2 line and \n
 
+void	add_front_sprite(t_sprites **lst, t_sprites *new)
+{
+	if (!new || !lst)
+		return ;
+	new->next = *lst;
+	*lst = new;
+}
+
+t_sprites 	*lstnew(int y, int x, int cube_size)
+{
+	t_sprites 	*list;
+
+	list = (t_sprites*)malloc(sizeof(t_sprites));
+	if (!list)
+		return (NULL);
+	list->x = x + cube_size / 2;
+	list->y = y + cube_size / 2;
+	list->len = 0;
+	list->next = NULL;
+	write(1, "\n",1);
+	ft_putnbr_fd(list->x, 1);
+	write(1, "\n",1);
+	ft_putnbr_fd(list->y, 1);
+	write(1, "\n",1);
+	return (list);
+}
+
+void	find_sprites(t_data *img, t_sprites *lst)
+{
+	int 		i;
+	int 		j;
+
+	i = 0;
+	while (img->map[i])
+	{
+		j = 0;
+		while (img->map[i][j])
+		{
+			if (img->map[i][j] == '2')
+			{
+				write(1, "\n",1);
+				ft_putnbr_fd(i, 1);
+				write(1, "\n",1);
+				ft_putnbr_fd(j, 1);
+				add_front_sprite(&lst, (lstnew((i * img->cube_size), (j * img->cube_size), img->cube_size)));
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+
+
+
 char *split_lines(char *line, char *list)
 {
 	char *tmp;
@@ -103,78 +158,26 @@ void	check_player_sight(t_data *img)
 	}
 }
 
-/* void    quarters_vert(t_data *img)
+double 		min_length(double horz, double vert, t_data *img)
 {
-    if (img->player.ang_start <= (M_PI + M_PI_2) && img->player.ang_start >= M_PI_2)
-        img->x -= img->cube_size;
-    else
-       img->x += img->cube_size;
-
-    if (img->player.ang_start < M_PI_2 && img->player.ang_start > (M_PI_2 + M_PI))
-        img->y += img->cube_size / tan(img->player.ang_start);
-    else if (img->player.ang_start == M_PI || img->player.ang_start == 0)
-        img->y = img->y;
-    else
-        img->y -= img->cube_size / tan(img->player.ang_start);
-}
-
-void    quarters_horz(t_data *img)
-{
-    if (img->player.ang_start >= 0 && img->player.ang_start <= M_PI)
-        img->y += img->cube_size;
-    else
-        img->y -= img->cube_size;
-
-    if (img->player.ang_start < M_PI_2 && img->player.ang_start > (M_PI_2 + M_PI))
-        img->x += img->cube_size / tan(img->player.ang_start);
-    else if (img->player.ang_start == (M_PI_2 + M_PI) || img->player.ang_start == M_PI_2)
-        img->x = img->x;
-    else
-        img->x -= img->cube_size / tan(img->player.ang_start);
-}
- */
-
-//void 	draw_sky(t_data *img)
-//{
-//	int x, y;
-//
-//	y = img->height / 2;
-//	while (y > 0)
-//	{
-//		x = 0;
-//		while (x < img->width - 1)
-//		{
-//			my_mlx_pixel_put(img, x, y, 0x5C5CFF);
-//			x++;
-//		}
-//		y--;
-//	}
-//}
-
-//void 	draw_floor(t_data *img)
-//{
-//	int x, y;
-//
-//	y = img->height / 2;
-//	while (y < img->height - 1)
-//	{
-//		x = 0;
-//		while (x < img->width - 1)
-//		{
-//			my_mlx_pixel_put(img, x, y, 0xDFEEFE);
-//			x++;
-//		}
-//		y++;
-//	}
-//}
-
-
-double 		min_length(double x, double y)
-{
-	if (x > y)
-		return (y);
+	if (horz > vert)
+	{
+		img->calc.x_or_y = img->vert_y;
+		if (img->player.ang_start < M_PI + M_PI_2 && img->player.ang_start > M_PI_2)
+			img->flag.west = 1;
+		else
+			img->flag.east = 1;
+		return (vert);
+	}
 	else
-		return (x);
+	{
+		img->calc.x_or_y = img->horz_x;
+		if (img->player.ang_start < 2 * M_PI && img->player.ang_start > M_PI)
+			img->flag.north = 1;
+		else
+			img->flag.south = 1;
+		return (horz);
+	}
 }
 
 double		find_horizontal(t_data *img)
@@ -183,41 +186,41 @@ double		find_horizontal(t_data *img)
 	double	horz_dis_x;
 
 	if (img->player.ang_start > M_PI && img->player.ang_start < (M_PI * 2))
-		img->y = (int)(img->player.y / img->cube_size) * img->cube_size - 0.00000000001; //координата точки пересечения с 1 квадратом Y
+		img->horz_y = (int) (img->player.y / img->cube_size) * img->cube_size - 0.00000000001; //координата точки пересечения с 1 квадратом Y
 	else if (img->player.ang_start == M_PI || img->player.ang_start == (M_PI * 2) || img->player.ang_start == 0)
 		return (INFINITY);
 	else
-		img->y = (int)(img->player.y / img->cube_size) * img->cube_size + img->cube_size;
+		img->horz_y = (int) (img->player.y / img->cube_size) * img->cube_size + img->cube_size;
 
 	if (img->player.ang_start > M_PI && img->player.ang_start < (M_PI * 2))
-		img->calc.dis_y = img->player.y - img->y;
+		img->calc.dis_y = img->player.y - img->horz_y;
 	else
-		img->calc.dis_y = img->y - img->player.y;
+		img->calc.dis_y = img->horz_y - img->player.y;
 	if (img->player.ang_start < (M_PI + M_PI_2) && img->player.ang_start > M_PI_2)
 	{
 		if (img->player.ang_start < (M_PI + M_PI_2) && img->player.ang_start > M_PI)
-			img->x = img->player.x - img->calc.dis_y * tan((M_PI + M_PI_2) - img->player.ang_start);
+			img->horz_x = img->player.x - img->calc.dis_y * tan((M_PI + M_PI_2) - img->player.ang_start);
 		else
-			img->x = img->player.x - img->calc.dis_y * tan(img->player.ang_start - M_PI_2);
+			img->horz_x = img->player.x - img->calc.dis_y * tan(img->player.ang_start - M_PI_2);
 	}
 	else if (img->player.ang_start == (M_PI_2 + M_PI) || img->player.ang_start == M_PI_2)
-		img->x = img->player.x;
+		img->horz_x = img->player.x;
 	else
 	{
 		if (img->player.ang_start > 0 && img->player.ang_start < M_PI_2)
-			img->x = img->calc.dis_y * tan(M_PI_2 - img->player.ang_start) + img->player.x;
+			img->horz_x = img->calc.dis_y * tan(M_PI_2 - img->player.ang_start) + img->player.x;
 		else
-			img->x = img->calc.dis_y * tan(img->player.ang_start - (M_PI + M_PI_2)) + img->player.x;
+			img->horz_x = img->calc.dis_y * tan(img->player.ang_start - (M_PI + M_PI_2)) + img->player.x;
 	}
 	img->calc.dis = 0;
-	while (img->y > 0 && img->x > 0 && img->y < 14*32 && img->x < 35*32 && img->map[(unsigned int)img->y/img->cube_size][(unsigned int)img->x/img->cube_size] != '1')
+	while (img->horz_y > 0 && img->horz_x > 0 && img->horz_y < 14*img->cube_size && img->horz_x < 35*img->cube_size && img->map[(unsigned int)img->horz_y/img->cube_size][(unsigned int)img->horz_x/img->cube_size] != '1')
 	{
 		quarters_horz(img);
 	}
-	if (img->y > 0 && img->x > 0 && img->y < 14*32 && img->x < 35*32 && img->map[(unsigned int)img->y/img->cube_size][(unsigned int)img->x/img->cube_size] == '1')
+	if (img->horz_y > 0 && img->horz_x > 0 && img->horz_y < 14*img->cube_size && img->horz_x < 35*img->cube_size && img->map[(unsigned int)img->horz_y/img->cube_size][(unsigned int)img->horz_x/img->cube_size] == '1')
 	{
-		horz_dis_y = img->player.y - img->y;
-		horz_dis_x = img->player.x - img->x;
+		horz_dis_y = img->player.y - img->horz_y;
+		horz_dis_x = img->player.x - img->horz_x;
 		img->calc.dis = pow(horz_dis_x, 2) + pow(horz_dis_y, 2);
 		return (sqrt(img->calc.dis));
 	}
@@ -227,47 +230,44 @@ double		find_horizontal(t_data *img)
 
 double 		find_vertical(t_data *img)
 {
-	double	vert_y = 0;
-	double	vert_x = 0;
+	double vert_dis_y = 0;
+	double vert_dis_x = 0;
 
 	if (img->player.ang_start < (M_PI + M_PI_2) && img->player.ang_start > M_PI_2)
-		img->x = (int)(img->player.x / img->cube_size) * img->cube_size - 0.00000000001;
+		img->vert_x = (int) (img->player.x / img->cube_size) * img->cube_size - 0.00000000001;
 	else if (img->player.ang_start == (M_PI + M_PI_2) || img->player.ang_start == M_PI_2)
 		return (INFINITY);
 	else
-		img->x = (int)(img->player.x / img->cube_size) * img->cube_size + img->cube_size;
-
+		img->vert_x = (int) (img->player.x / img->cube_size) * img->cube_size + img->cube_size;
 	if (img->player.ang_start < (M_PI + M_PI_2) && img->player.ang_start > M_PI_2)
-		img->calc.dis_x = img->player.x - img->x;
+		img->calc.dis_x = img->player.x - img->vert_x;
 	else
-		img->calc.dis_x = img->x - img->player.x;
+		img->calc.dis_x = img->vert_x - img->player.x;
 
 	if (img->player.ang_start < (M_PI * 2) && img->player.ang_start > M_PI)
 	{
 		if (img->player.ang_start > M_PI && img->player.ang_start < (M_PI + M_PI_2))
-			img->y = img->player.y - img->calc.dis_x * tan(img->player.ang_start - M_PI);
+			img->vert_y = img->player.y - img->calc.dis_x * tan(img->player.ang_start - M_PI);
 		else
-			img->y = img->player.y - img->calc.dis_x * tan(2 * M_PI - img->player.ang_start);
+			img->vert_y = img->player.y - img->calc.dis_x * tan(2 * M_PI - img->player.ang_start);
 	}
 	else if (img->player.ang_start == (M_PI * 2) || img->player.ang_start == M_PI || img->player.ang_start == 0)
-		img->y = img->player.y;
+		img->vert_y = img->player.y;
 	else
 	{
 		if (img->player.ang_start > 0 && img->player.ang_start < M_PI_2)
-			img->y = img->player.y + img->calc.dis_x * tan(img->player.ang_start);
+			img->vert_y = img->player.y + img->calc.dis_x * tan(img->player.ang_start);
 		else
-			img->y = img->player.y + img->calc.dis_x * tan(M_PI - img->player.ang_start);
+			img->vert_y = img->player.y + img->calc.dis_x * tan(M_PI - img->player.ang_start);
 	}
 	img->calc.dis = 0;
-	while (img->y > 0 && img->x > 0 && img->x < 35 * 32 && img->y < 14*32 && img->map[(unsigned int)img->y/img->cube_size][(unsigned int)img->x/img->cube_size] != '1')
-	{
+	while (img->vert_y > 0 && img->vert_x > 0 && img->vert_x < 35 * img->cube_size && img->vert_y < 14*img->cube_size && img->map[(unsigned int)img->vert_y/img->cube_size][(unsigned int)img->vert_x/img->cube_size] != '1')
 		quarters_vert(img);
-	}
-	if (img->y > 0 && img->x > 0 && img->x < 35 * 32 && img->y < 14*32 && img->map[(unsigned int)img->y/img->cube_size][(unsigned int)img->x/img->cube_size] == '1')
+	if (img->vert_y > 0 && img->vert_x > 0 && img->vert_x < 35 * img->cube_size && img->vert_y < 14*img->cube_size && img->map[(unsigned int)img->vert_y/img->cube_size][(unsigned int)img->vert_x/img->cube_size] == '1')
 	{
-		vert_y = img->player.y - img->y;
-		vert_x = img->player.x - img->x;
-		img->calc.dis = pow(vert_x, 2) + pow(vert_y, 2);
+		vert_dis_y = img->player.y - img->vert_y;
+		vert_dis_x = img->player.x - img->vert_x;
+		img->calc.dis = pow(vert_dis_x, 2) + pow(vert_dis_y, 2);
 		return (sqrt(img->calc.dis));
 	}
 	else
@@ -282,7 +282,7 @@ void 	tracer(t_data *img)
 
 	horz_len = find_horizontal(img);
 	vert_len = find_vertical(img);
-	img->calc.min_len = min_length(horz_len, vert_len);
+	img->calc.min_len = min_length(horz_len, vert_len, img);
 	img->calc.min_len = img->calc.min_len * cos(img->player.angle - img->player.ang_start);
 //	if (img->calc.min_len != INFINITY)
 //	{
@@ -293,45 +293,22 @@ void 	tracer(t_data *img)
 //		}
 //	}
 	draw_wall(img);
+	clear_flags(img);
 }
-
-//void 	draw_wall(t_data *img)
-//{
-//	int obj_h;
-//	int obj_start;
-//	int obj_end;
-//
-//	obj_h = (int)((img->calc.dis_to_proj / (img->calc.min_len * img->cube_size)) * img->height);
-//	obj_start = (img->height / 2) - (obj_h / 2);
-//	obj_end = (img->height / 2) + (obj_h / 2);
-//	if (obj_end > img->height)
-//		obj_end = img->height - 1;
-//	if (obj_start < 0)
-//		obj_start = 0;
-//	while (obj_start < obj_end)
-//	{
-//		my_mlx_pixel_put(img, img->pixel, obj_start, 0x3F5F7F);
-//		obj_start++;
-//	}
-//}
-
 
 void 	func(t_data *img)
 {
-	int count;
-	double ang_step;
+	int		count;
+	double	ang_step;
 	count = 0;
 
 	img->img = mlx_new_image(img->mlx, 1920 , 1080);
 	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel, &img->line_length , &img->endian);
 
-	img->calc.dis_to_proj = (img->width / 2) / tan(M_PI_6); // Расстояние до проекции
 	ang_step = M_PI_3 / img->width;
 	img->player.ang_start = img->player.angle - M_PI_6; // угол начала
 	img->player.ang_end = img->player.angle + M_PI_6; // угол конца
 	//draw_map_player(img);
-//	draw_sky(img);
-//	draw_floor(img);
 	while (count < img->width)
 	{
 		img->player.ang_start > 2*M_PI ? img->player.ang_start -= 2*M_PI : 0;
@@ -341,76 +318,76 @@ void 	func(t_data *img)
 		img->player.ang_start += ang_step;
 		count++;
 	}
+
 	mlx_put_image_to_window(img->mlx, img->mlx_win, img->img, 0, 0);
 }
 
 /// Draw 32 pixels
 
-void 	draw_cub32(int x, int y, int c, t_data *img)
-{
-	int x_max, y_max, color , x_img;
-	x_max = x + 32;
-	y_max = y + 32;
-	x_img = x;
-	//write(1, "fail\n", 5);
-	if (c == '0')
-		color = 0x00FF0000; // color - red
-	else if (c == '1')
-		color = 0x000000FF; // color - blue
-	while (y < y_max)
-	{
-		x = x_img;
-		while (x < x_max)
-			my_mlx_pixel_put(img, x++, y, color);
-		y++;
-	}
-}
+//void 	draw_cub32(int x, int y, int c, t_data *img)
+//{
+//	int x_max, y_max, color , x_img;
+//	x_max = x + 32;
+//	y_max = y + 32;
+//	x_img = x;
+//	//write(1, "fail\n", 5);
+//	if (c == '0')
+//		color = 0x00FF0000; // color - red
+//	else if (c == '1')
+//		color = 0x000000FF; // color - blue
+//	while (y < y_max)
+//	{
+//		x = x_img;
+//		while (x < x_max)
+//			my_mlx_pixel_put(img, x++, y, color);
+//		y++;
+//	}
+//}
 
-void 	draw_player(int x_max, int y_max, t_data *img)
-{
-	int count_y, count_x;
-
-	count_x = img->player.x;
-
-	while (count_x++ < x_max)
-	{
-		count_y = img->player.y;
-		while (count_y++ < y_max)
-			my_mlx_pixel_put(img, count_x, count_y, img->color);
-	}
-}
-
-
-void 	draw_map_player(t_data *img)
-{
-	draw_map2d(img);
-	draw_player(img->player.x + 1, img->player.y + 1, img);
-}
+//void 	draw_player(int x_max, int y_max, t_data *img)
+//{
+//	int count_y, count_x;
+//
+//	count_x = img->player.x;
+//
+//	while (count_x++ < x_max)
+//	{
+//		count_y = img->player.y;
+//		while (count_y++ < y_max)
+//			my_mlx_pixel_put(img, count_x, count_y, img->color);
+//	}
+//}
+//
+//void 	draw_map_player(t_data *img)
+//{
+//	draw_map2d(img);
+//	draw_player(img->player.x + 1, img->player.y + 1, img);
+//}
 
 /// Draw map top view
 
-void	draw_map2d(t_data *img)
-{
-	int count_y, count_x, i, j;
-
-	count_y = 0;
-	i = 0;
-
-	while (img->map[i])
-	{
-		j = 0;
-		count_x = 0;
-		while (img->map[i][j])
-		{
-			if(img->map[i][j] == '1' || img->map[i][j] == '0')
-				draw_cub32(count_x, count_y, img->map[i][j], img);
-			j++;
-			count_x += 32;
-		}
-		count_y += 32;
-		i++;
-	}
-}
+//void	draw_map2d(t_data *img)
+//{
+//	int count_y, count_x, i, j;
+//
+//	count_y = 0;
+//	i = 0;
+//
+//	while (img->map[i])
+//	{
+//		j = 0;
+//		count_x = 0;
+//		while (img->map[i][j])
+//		{
+//			if(img->map[i][j] == '1' || img->map[i][j] == '0')
+//				draw_cub32(count_x, count_y, img->map[i][j], img);
+//			j++;
+//			count_x += 32;
+//		}
+//		count_y += 32;
+//		i++;
+//	}
+//}
 
 int 	key(int keycode, t_data *img) 
 {
@@ -439,11 +416,11 @@ int 	key(int keycode, t_data *img)
 		if (img->player.angle < 0)
 			img->player.angle += M_PI * 2;
 	}
+
 	mlx_destroy_image(img->mlx, img->img);
 	func(img);
 	return (1);
 }
-
 
 int		main()
 {
@@ -452,18 +429,40 @@ int		main()
 	img.width = 1920;
 	img.height = 1080;
 	img.cube_size = 32;
-	img.calc.dis_to_proj = (img.width / 2) / tan(M_PI_6);
+	img.calc.dis_to_proj = (img.width / 2) / tan(M_PI_6); // distance to proection
 	//img.player.x = 700;
 	//img.player.y = 800;
-
 	//img.color = 0x0000FF00;
 	//img.speed = 5;
 
 	img.mlx = mlx_init();
 	img.mlx_win = mlx_new_window(img.mlx, img.width, img.height, "Cub3d - drina");
 
+	// textures 1
+	img.txt1.txt = mlx_xpm_file_to_image(img.mlx, "textures/WALL97.xpm", &img.txt1.width, &img.txt1.height);
+	img.txt1.addr = (int*)mlx_get_data_addr(img.txt1.txt, &img.txt1.bits_per_pixel, &img.txt1.line_length , &img.txt1.endian);
+
+	// textures 2
+	img.txt2.txt = mlx_xpm_file_to_image(img.mlx, "textures/WALL65.xpm", &img.txt2.width, &img.txt2.height);
+	img.txt2.addr = (int*)mlx_get_data_addr(img.txt2.txt, &img.txt2.bits_per_pixel, &img.txt2.line_length , &img.txt2.endian);
+
+	// textures 3
+	img.txt3.txt = mlx_xpm_file_to_image(img.mlx, "textures/WALL75.xpm", &img.txt3.width, &img.txt3.height);
+	img.txt3.addr = (int*)mlx_get_data_addr(img.txt3.txt, &img.txt3.bits_per_pixel, &img.txt3.line_length , &img.txt3.endian);
+
+	// textures 4
+	img.txt4.txt = mlx_xpm_file_to_image(img.mlx, "textures/WALL76.xpm", &img.txt4.width, &img.txt4.height);
+	img.txt4.addr = (int*)mlx_get_data_addr(img.txt4.txt, &img.txt1.bits_per_pixel, &img.txt4.line_length , &img.txt4.endian);
+
+	// sprite
+	img.sprite.txt = mlx_xpm_file_to_image(img.mlx, "textures/WALL76.xpm", &img.sprite.width, &img.sprite.height);
+	img.sprite.addr = (int*)mlx_get_data_addr(img.sprite.txt, &img.sprite.bits_per_pixel, &img.sprite.line_length , &img.sprite.endian);
+
+
+
 	img.map = parse_map();
 	check_player_sight(&img);
+	find_sprites(&img, img.sprites);
 	func(&img);
 	//draw_map_player(&img);
 
