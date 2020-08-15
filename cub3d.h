@@ -7,12 +7,14 @@
 # define M_PI_3 M_PI/3
 
 # include "math.h"
+# include <fcntl.h>
+# include "libft/libft.h"
 
 typedef struct		s_sprites
 {
 	int					x;
 	int					y;
-	int 				len;
+	double 				len;
 	struct s_sprites	*next;
 }					t_sprites;
 
@@ -56,6 +58,7 @@ typedef struct  s_calc {
     double		dis_y;
 	double		dis;
 	double 		x_or_y;
+	double 		*arr_min_len_wall;
 }               t_calc;
 
 typedef struct  s_data {
@@ -102,5 +105,10 @@ void 	draw_map_player(t_data *img);
 void 	draw_floor(t_data *img, int obj_start);
 void 	draw_sky(t_data *img, int obj_start);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+
+double 		min_length(double horz, double vert, t_data *img);
+double 		find_vertical(t_data *img);
+double		find_horizontal(t_data *img);
+int			lst_size(t_sprites *lst);
 
 #endif

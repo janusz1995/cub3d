@@ -3,7 +3,7 @@
 
 NAME = cub3d
 
-SRC = cub3d.c quarters.c draw.c
+SRC = cub3d.c quarters.c draw.c min_length.c find_vertical.c find_horizontal.c
 
 SRCO = $(SRC:.c=.o)
 
