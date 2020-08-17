@@ -15,26 +15,44 @@ void            my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-void	add_back_sprite(t_sprites **lst, t_sprites *new)
+//void 	parcer(t_data *img)
+//{
+//
+//
+//
+//
+//
+//
+//
+//
+//}
+
+
+void 		all_len_sprites(t_data *img)
 {
-	if (!lst || !new)
-		return ;
-	if (!*lst)
-		*lst = new;
-	else
+	t_sprites *head;
+
+	head = img->sprites;
+	while (head != NULL)
 	{
-		while ((*lst)->next != NULL)
-			*lst = (*lst)->next;
-		(*lst)->next = new;
+		printf("%f\n", head->len);
+		head = head->next;
 	}
 }
 
-void	add_front_sprite(t_sprites **lst, t_sprites *new)
+void	add_back_sprite(t_data *img, t_sprites *new)
 {
-	if (!new || !lst)
-		return ;
-	new->next = *lst;
-	*lst = new;
+	t_sprites 	*save_head;
+
+	save_head = img->sprites;
+	if (save_head == NULL)
+		img->sprites = new;
+	else
+	{
+		while (save_head->next != NULL)
+			save_head = save_head->next;
+		save_head->next = new;
+	}
 }
 
 t_sprites 	*lstnew(int y, int x, int cube_size)
@@ -48,11 +66,6 @@ t_sprites 	*lstnew(int y, int x, int cube_size)
 	list->y = y + cube_size / 2;
 	list->len = 0;
 	list->next = NULL;
-//	write(1, "\n",1);
-//	ft_putnbr_fd(list->x, 1);
-//	write(1, "\n",1);
-//	ft_putnbr_fd(list->y, 1);
-//	write(1, "\n",1);
 	return (list);
 }
 
@@ -68,60 +81,50 @@ void	find_sprites(t_data *img)
 		while (img->map[i][j])
 		{
 			if (img->map[i][j] == '2')
-				add_back_sprite(&img->sprites, (lstnew((i * img->cube_size), (j * img->cube_size), img->cube_size)));
+				add_back_sprite(img, (lstnew((i * img->cube_size), (j * img->cube_size), img->cube_size)));
 			j++;
 		}
 		i++;
 	}
 }
+ void		draw_pixel_sprite(t_data *img, int i, int j, double coef)
+{
+	int	color;
 
+	color = img->sprite.addr[(int)(j * coef) * img->sprite.width + (int)(i * coef) % img->sprite.height];
+	if (color > 0)
+		my_mlx_pixel_put(img, img->calc.sprite_x + i, img->calc.sprite_y + j, color);
+}
 
-void 	draw_sprite(t_data *img)
+void 	draw_sprite(t_data *img, t_sprites *tmp)
 {
 	int 	sprite_h;
-//	int 	x;
-//	int 	y;
-	double 	sprite_x;
-	int 	sprite_y;
-	double sprite_dir;
+	int 	x;
+	int		y;
+	double  coef;
 
-	img->sprites->len = sqrt(pow(img->sprites->x - img->player.x, 2) + pow(img->sprites->y - img->player.y, 2));
-	//img->sprites->len = sqrt(img->sprites->len);
-	sprite_h = (int)((img->calc.dis_to_proj / (img->sprites->len * img->cube_size)) * img->height);
+	tmp->len = sqrt(pow(tmp->x - img->player.x, 2) + pow(tmp->y - img->player.y, 2));
+	sprite_h = (int)((img->calc.dis_to_proj / (tmp->len * img->cube_size) * img->height));
+	img->calc.sprite_dir = atan2((tmp->y - img->player.y), (tmp->x - img->player.x));
+	coef = 64.0 / sprite_h;
+	while (img->calc.sprite_dir - img->player.angle >  M_PI) img->calc.sprite_dir -= 2*M_PI;
+	while (img->calc.sprite_dir - img->player.angle < -M_PI) img->calc.sprite_dir += 2*M_PI;
 
-	sprite_dir = atan2((img->sprites->y - img->player.y), (img->sprites->x - img->player.x));
-
-//	if (x < 0 && y < 0)
-//		sprite_dir += M_PI;
-//	else if (x > 0 && y < 0)
-//		sprite_dir += (M_PI_2 + M_PI);
-//	else if (x < 0 && y > 0)
-//		sprite_dir += M_PI_2;
-
-	while (sprite_dir - img->player.angle >  M_PI)
-		sprite_dir -= 2*M_PI;
-	while (sprite_dir - img->player.angle < -M_PI)
-		sprite_dir += 2*M_PI;
-
-	sprite_dir = sprite_dir - img->player.angle;
-	//printf("%f\n", sprite_dir);
-	sprite_x = sprite_dir * (img->width/2) / (M_PI / 6) + img->width/2 - sprite_h/2;
-	sprite_y = img->height/2 - sprite_h/2;
-	int i = 0;
-	int j = 0;
-	//if (sprite_dir < img->player.ang_end && sprite_dir > img->player.ang_end - M_PI_6)
-		while (i < sprite_h)
+	img->calc.sprite_dir = img->calc.sprite_dir - img->player.angle;
+	img->calc.sprite_x = img->calc.sprite_dir * (img->width/2) / (M_PI / 6) + img->width/2 - sprite_h/2;
+	img->calc.sprite_y = img->height/2 - sprite_h/2;
+	y = 0;
+	while (y < sprite_h)
+	{
+		x = 0;
+		while (x < sprite_h)
 		{
-			j = 0;
-			while (j < sprite_h)
-			{
-				if (sprite_x + i < img->width && i + sprite_x >= 0 && img->calc.arr_min_len_wall[(int)(sprite_x + i)] > img->sprites->len)
-					my_mlx_pixel_put(img, sprite_x + i, sprite_y + j, 0x000000);
-				j++;
-			}
-
-			i++;
+			if (img->calc.sprite_x + y < img->width && y + img->calc.sprite_x >= 0 && img->calc.arr_min_len_wall[(int)(img->calc.sprite_x + y)] > tmp->len)
+					draw_pixel_sprite(img, y, x, coef);
+			x++;
 		}
+		y++;
+	}
 }
 
 /// Split 2 lines and \n
@@ -171,50 +174,6 @@ char	**parse_map()
 	//printf("%d", count);
 }
 
-int 	check_direction_player(int sym, t_data *img)
-{
-	if (sym == 'N' || sym == 'S' || sym == 'W' || sym == 'E')
-	{
-		img->player.ang_fov = M_PI / 3;
-		if (sym == 'E')
-			img->player.angle = 0; //  0/360
-		else if (sym == 'S')
-			img->player.angle = M_PI_2; // 90
-		else if (sym == 'W')
-			img->player.angle = M_PI; // 180
-		else
-			img->player.angle = M_PI_2 * 3; // 270
-		return (1);
-	}
-	else
-		return (0);
-}
-
-void	check_player_sight(t_data *img)
-{
-	int i;
-	int j;
-
-	i = 0;
-	while (img->map[i])
-	{
-		j = 0;
-		while (img->map[i][j])
-		{
-			if (check_direction_player(img->map[i][j], img))
-			{
-				img->vert = j;
-				img->horz = i;
-				img->player.x = (j * img->cube_size) + (img->cube_size/2);
-				img->player.y = (i * img->cube_size) + (img->cube_size/2);
-				break ;
-			}
-			j++;
-		}
-		i++;
-	}
-}
-
 void 	tracer(t_data *img)
 {
 	double horz_len;
@@ -246,7 +205,7 @@ void 	func(t_data *img)
 {
 	int			count;
 	double		ang_step;
-	t_sprites 	*head;
+	t_sprites 	*save_head;
 	count = 0;
 
 	img->img = mlx_new_image(img->mlx, img->width , img->height);
@@ -265,13 +224,14 @@ void 	func(t_data *img)
 		img->player.ang_start += ang_step;
 		count++;
 	}
-	head = img->sprites;
-	while (img->sprites != NULL)
+	sort_len_list(img);
+	save_head = img->sprites;
+	while (save_head != NULL)
 	{
-		draw_sprite(img);
-		img->sprites = img->sprites->next;
+		draw_sprite(img, save_head);
+		save_head = save_head->next;
 	}
-	img->sprites = head;
+	//all_len_sprites(img);
 	mlx_put_image_to_window(img->mlx, img->mlx_win, img->img, 0, 0);
 }
 
@@ -361,6 +321,20 @@ int 	key(int keycode, t_data *img)
 		if (img->map[(unsigned int)img->player.y/img->cube_size][(unsigned int)(img->player.x - 5 * cos(img->player.angle))/img->cube_size] != '1')
 			img->player.x -= 5 * cos(img->player.angle);
 	}
+//	else if (keycode == 2) // right
+//	{
+//		if (img->map[(unsigned int)(img->player.y/img->cube_size)][(unsigned int)(img->player.x - 5 * sin(img->player.angle)/img->cube_size)] != '1')
+//			img->player.x -= 5 * sin(img->player.angle);
+//		if (img->map[(unsigned int)(img->player.y + 5 * cos(img->player.angle))/img->cube_size][(unsigned int)img->player.x/img->cube_size] != '1')
+//			img->player.y += 5 * cos(img->player.angle);
+//	}
+//	else if (keycode == 0) // left
+//	{
+//		if (img->map[(unsigned int)(img->player.y/img->cube_size)][(unsigned int)(img->player.x + 5 * sin(img->player.angle)/img->cube_size)] != '1')
+//			img->player.x += 5 * sin(img->player.angle);
+//		if (img->map[(unsigned int)(img->player.y - 5 * cos(img->player.angle))/img->cube_size][(unsigned int)(img->player.x/img->cube_size)] != '1')
+//			img->player.y -= 5 * cos(img->player.angle);
+//	}
 	else if (keycode == 124) // right
 	{
 		img->player.angle += 0.1;
@@ -412,13 +386,14 @@ int		main()
 	img.txt4.addr = (int*)mlx_get_data_addr(img.txt4.txt, &img.txt1.bits_per_pixel, &img.txt4.line_length , &img.txt4.endian);
 
 	// sprite
-	img.sprite.txt = mlx_xpm_file_to_image(img.mlx, "textures/WALL76.xpm", &img.sprite.width, &img.sprite.height);
+	img.sprite.txt = mlx_xpm_file_to_image(img.mlx, "textures/barrel.xpm", &img.sprite.width, &img.sprite.height);
 	img.sprite.addr = (int*)mlx_get_data_addr(img.sprite.txt, &img.sprite.bits_per_pixel, &img.sprite.line_length , &img.sprite.endian);
 
 	img.calc.arr_min_len_wall = (double*)malloc(img.width * sizeof(double));
 
 	if (!(img.map = parse_map()))
 			return (0);
+	//parcer(&img);
 	check_player_sight(&img);
 	img.sprites = NULL;
 	find_sprites(&img);

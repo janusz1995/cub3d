@@ -3,41 +3,50 @@
 
 void 				sort_len_list(t_data *img)
 {
-	t_sprites 		*new_head;
-	t_sprites 		*tmp;
-	t_sprites 		*max;
-	t_sprites 		*head;
-
-	new_head = img->sprites;
-	head = new_head;
-	while ((lst_size(head)) != lst_size(img->sprites))
+	t_sprites	*tmp;
+	int 		flag;
+	
+	flag = 1;
+	while (flag)
 	{
+		flag = 0;
 		tmp = img->sprites;
-		while (tmp != NULL)// до тех пор пока кол-во элементов во новом списке не будет равно в первой списке!!!!!!
+		while (tmp->next != NULL)
 		{
-			max = img->sprites;
-			if (img->sprites->len < img->sprites->next->len)
-				max = img->sprites->next;
-			tmp = tmp->next;
+			if (tmp->len < tmp->next->len)
+			{
+				swap_two_sprites(&(img->sprites), tmp, tmp->next);
+				flag = 1;
+			}
+			else
+				tmp = tmp->next;
 		}
-		if (!head)
-			head = max;
-		else
-			head->next = max;
-		head = head->next;
 	}
-	img->sprites = new_head;
 }
 
-int		lst_size(t_sprites *lst)
-{
-	int count;
+/// Swap 2 element in list
 
-	count = 0;
-	while (lst != NULL)
+void 	swap_two_sprites(t_sprites **head, t_sprites *one, t_sprites *two)
+{
+	t_sprites 	*tmp;
+	t_sprites	*root;
+
+	root = *head;
+	if (root == one)
 	{
-		count++;
-		lst = lst->next;
+		tmp = two->next;
+		two->next = one;
+		one->next = tmp;
+		(*head) = two;
 	}
-	return (count);
+	else
+	{
+		while (root->next != one)
+			root = root->next;
+
+		tmp = two->next;
+		two->next = one;
+		one->next = tmp;
+		root->next = two;
+	}
 }

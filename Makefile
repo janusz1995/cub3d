@@ -3,7 +3,8 @@
 
 NAME = cub3d
 
-SRC = cub3d.c quarters.c draw.c min_length.c find_vertical.c find_horizontal.c
+SRC = cub3d.c quarters.c draw.c min_length.c find_vertical.c find_horizontal.c sort_by_len_list.c \
+		check_direction_player.c check_player_sight.c clear_flags.c
 
 SRCO = $(SRC:.c=.o)
 

@@ -59,6 +59,9 @@ typedef struct  s_calc {
 	double		dis;
 	double 		x_or_y;
 	double 		*arr_min_len_wall;
+	int 		sprite_x;
+	int 		sprite_y;
+	double		sprite_dir;
 }               t_calc;
 
 typedef struct  s_data {
@@ -96,19 +99,26 @@ typedef struct  s_data {
 	t_sprites 	*sprites;
 }               t_data;
 
-void 	clear_flags(t_data *img);
-void 	draw_wall(t_data *img);
-void	draw_map2d(t_data *img);
-void    quarters_horz(t_data *img);
-void    quarters_vert(t_data *img);
-void 	draw_map_player(t_data *img);
-void 	draw_floor(t_data *img, int obj_start);
-void 	draw_sky(t_data *img, int obj_start);
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void 		clear_flags(t_data *img);
+void 		draw_wall(t_data *img);
+void		draw_map2d(t_data *img);
+void    	quarters_horz(t_data *img);
+void    	quarters_vert(t_data *img);
+void 		draw_map_player(t_data *img);
+void 		draw_floor(t_data *img, int obj_start);
+void 		draw_sky(t_data *img, int obj_start);
+void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void		check_player_sight(t_data *img);
+void 		swap_two_sprites(t_sprites **head, t_sprites *one, t_sprites *two);
+void 		sort_len_list(t_data *img);
 
 double 		min_length(double horz, double vert, t_data *img);
 double 		find_vertical(t_data *img);
 double		find_horizontal(t_data *img);
+
 int			lst_size(t_sprites *lst);
+int 		check_direction_player(int sym, t_data *img);
+
+t_sprites 	last_sprite(t_sprites *lst);
 
 #endif
