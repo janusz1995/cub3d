@@ -18,4 +18,6 @@ void 	void_flags_struct(t_data *img)
 	img->flag.east = 0;
 	img->flag.floor = 0;
 	img->flag.sky = 0;
+	img->flag.error = 0;
+	img->error.num_players = 0;
 }

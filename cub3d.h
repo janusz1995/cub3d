@@ -46,6 +46,13 @@ typedef struct  s_flags {
 
 }               t_flags;
 
+typedef struct		s_errors
+{
+	int			no_valid_map;
+	int			num_players;
+
+}					t_errors;
+
 typedef struct  s_player {
 
 	double 		x;
@@ -120,6 +127,7 @@ typedef struct  s_data {
 	t_flags		flag;
 	t_sprites 	*sprites;
 	t_path		path;
+	t_errors 	error;
 }               t_data;
 
 void 		clear_flags(t_data *img);
@@ -144,6 +152,9 @@ void		add_back_sprite(t_data *img, t_sprites *new);
 void		draw_pixel_sprite(t_data *img, int i, int j, double coef);
 void 		draw_sprite(t_data *img, t_sprites *tmp);
 void 		flood_fill(t_data *img, int x, int y, char **map, char new_sym);
+void 		get_textures(t_data *img);
+void 		errors(t_data *img);
+void 		free_double_arr(char **arr);
 
 double 		min_length(double horz, double vert, t_data *img);
 double 		find_vertical(t_data *img);
@@ -153,6 +164,8 @@ double		find_horizontal(t_data *img);
 int			lst_size(t_sprites *lst);
 int 		check_direction_player(int sym, t_data *img);
 int 		check_flags_struct(t_data *img);
+int 		check_line(char *str);
+int 		check_num_lines(char **str, int c);
 
 t_sprites 	last_sprite(t_sprites *lst);
 t_sprites 	*lstnew(int y, int x, int cube_size);

@@ -9,44 +9,6 @@ int 	check_flags_struct(t_data *img)
 				&& img->flag.west && img->flag.east && img->flag.sprite);
 }
 
-int 	check_num_lines(char **str, int c)
-{
-	int 	count;
-
-	count = 0;
-	while (str[count])
-		count++;
-
-	if (count == c)
-		return (1);
-	else
-		return (0);
-}
-
-void 	free_double_arr(char **arr)
-{
-	int count;
-
-	count = 0;
-	while (arr[count])
-		free(arr[count++]);
-	free(arr);
-}
-
-int 	check_line(char *str)
-{
-	int 	count;
-
-	count = 0;
-	while (str[count] != '\0')
-	{
-		if (ft_isdigit(str[count]))
-			count++;
-		else
-			return (0);
-	}
-	return (1);
-}
 
 void 	fill_width_and_height(t_data *img, char *str)
 {

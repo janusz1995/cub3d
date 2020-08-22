@@ -39,7 +39,7 @@ void 	parse_line(t_data *img, char *str)
 	else if (str[count] == 'F' && str[count + 1] == ' ')
 		fill_color(str, img->color_floor, img, &img->flag.floor);
 	else if (str[count] == 'C' && str[count + 1] == ' ')
-		fill_color(str, img->color_sky, img, &img->flag.sky);//
+		fill_color(str, img->color_sky, img, &img->flag.sky);
 	else
 		img->flag.error = 1;
 
@@ -89,7 +89,6 @@ void		parse(t_data *img)
 	char *line;
 	char *list;
 
-	img->flag.error = 0;
 	if (!(fd = open("map.txt", O_RDONLY)))
 		printf("%d", fd); // !!!!!!!!!!!! need fix return (need return NULL!)
 	list = ft_strdup("");
@@ -303,7 +302,6 @@ int		main()
 
 	parse(&img);
 
-
 	img.cube_size = 32;
 	img.calc.dis_to_proj = (img.width / 2.0) / tan(M_PI_6); // distance to proection
 	img.calc.ang_step = M_PI_3 / img.width;
@@ -339,6 +337,8 @@ int		main()
 	check_player_sight(&img);
 	img.sprites = NULL;
 	flood_fill(&img, img.vert, img.horz, img.flood_map, '7');
+	errors(&img);
+	free_double_arr(img.flood_map);
 	find_sprites(&img);
 	func(&img);
 	//draw_map_player(&img);
