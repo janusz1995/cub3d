@@ -1,0 +1,40 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/drina/drina/cub3d/cub3d.c
+stdio.h
+-
+cub3d.h
+/Users/drina/drina/cub3d/cub3d.h
+
+/Users/drina/drina/cub3d/cub3d.h
+math.h
+/Users/drina/drina/cub3d/math.h
+fcntl.h
+-
+libft/libft.h
+/Users/drina/drina/cub3d/libft/libft.h
+mlx/mlx.h
+/Users/drina/drina/cub3d/mlx/mlx.h
+libft/get_next_line.h
+/Users/drina/drina/cub3d/libft/get_next_line.h
+
+/Users/drina/drina/cub3d/libft/get_next_line.h
+stdlib.h
+-
+unistd.h
+-
+
+/Users/drina/drina/cub3d/libft/libft.h
+stdlib.h
+-
+unistd.h
+-
+
+/Users/drina/drina/cub3d/mlx/mlx.h
+

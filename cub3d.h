@@ -9,6 +9,17 @@
 # include "math.h"
 # include <fcntl.h>
 # include "libft/libft.h"
+# include "mlx/mlx.h"
+# include "libft/get_next_line.h"
+
+typedef struct		s_path
+{
+	char				*north;
+	char				*south;
+	char				*east;
+	char				*west;
+	char				*sprite;
+}					t_path;
 
 typedef struct		s_sprites
 {
@@ -26,6 +37,13 @@ typedef struct  s_flags {
 	int 		west;
 	int 		horz;
 	int 		vert;
+	int 		width;
+	int 		height;
+	int			sky;
+	int			floor;
+	int			sprite;
+	int 		error;
+
 }               t_flags;
 
 typedef struct  s_player {
@@ -36,6 +54,7 @@ typedef struct  s_player {
 	double 		ang_start;
 	double 		ang_end;
 	double 		ang_fov;
+	char		letter;
 
 }               t_player;
 
@@ -62,12 +81,14 @@ typedef struct  s_calc {
 	int 		sprite_x;
 	int 		sprite_y;
 	double		sprite_dir;
+	double 		ang_step;
 }               t_calc;
 
 typedef struct  s_data {
 
 	void        *img;
 	char		**map;
+	char		**flood_map;
 	char        *addr;
 	int         bits_per_pixel;
 	int         line_length;
@@ -85,7 +106,8 @@ typedef struct  s_data {
 	double		vert_y;
 	double		horz_x;
 	double		horz_y;
-	int			color;
+	int			color_floor;
+	int			color_sky;
 	int 		speed;
 	int 		cube_size;
 	t_player 	player;
@@ -97,6 +119,7 @@ typedef struct  s_data {
 	t_textures	sprite;
 	t_flags		flag;
 	t_sprites 	*sprites;
+	t_path		path;
 }               t_data;
 
 void 		clear_flags(t_data *img);
@@ -111,14 +134,27 @@ void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void		check_player_sight(t_data *img);
 void 		swap_two_sprites(t_sprites **head, t_sprites *one, t_sprites *two);
 void 		sort_len_list(t_data *img);
+void 		fill_width_and_height(t_data *img, char *str);
+void 		fill_side(t_data *img, char *str, char **side, int *flag);
+void 		fill_color(char *str, int color, t_data *img, int *flag);
+void 		free_double_arr(char **arr);
+void 		void_flags_struct(t_data *img);
+void		find_sprites(t_data *img);
+void		add_back_sprite(t_data *img, t_sprites *new);
+void		draw_pixel_sprite(t_data *img, int i, int j, double coef);
+void 		draw_sprite(t_data *img, t_sprites *tmp);
+void 		flood_fill(t_data *img, int x, int y, char **map, char new_sym);
 
 double 		min_length(double horz, double vert, t_data *img);
 double 		find_vertical(t_data *img);
 double		find_horizontal(t_data *img);
 
+
 int			lst_size(t_sprites *lst);
 int 		check_direction_player(int sym, t_data *img);
+int 		check_flags_struct(t_data *img);
 
 t_sprites 	last_sprite(t_sprites *lst);
+t_sprites 	*lstnew(int y, int x, int cube_size);
 
 #endif

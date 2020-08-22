@@ -1,3 +1,14 @@
+R 1920 1080
+
+NO textures/WALL97.xpm
+SO textures/WALL65.xpm
+WE textures/WALL75.xpm
+EA textures/WALL76.xpm
+S textures/barrel.xpm
+
+F 220,100,0
+C 225,30,0
+
           1111111111111111111111111
           1000000000110000000000001
           1011000001110000000000001

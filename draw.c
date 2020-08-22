@@ -36,7 +36,7 @@ void 	draw_floor(t_data *img, int obj_start)
 
 	floor = obj_start;
 	while (floor < img->height - 1)
-		my_mlx_pixel_put(img, img->pixel, floor++, 0xDFEEFE);
+		my_mlx_pixel_put(img, img->pixel, floor++, img->color_floor);//0xDFEEFE);
 }
 
 void 	draw_sky(t_data *img, int obj_start)
@@ -45,7 +45,7 @@ void 	draw_sky(t_data *img, int obj_start)
 
 	sky = 0;
 	while (sky < obj_start)
-		my_mlx_pixel_put(img, img->pixel, sky++, 0x5C5CFF);
+		my_mlx_pixel_put(img, img->pixel, sky++, img->color_sky);//0x5C5CFF);
 }
 
 void 	draw_wall(t_data *img)
