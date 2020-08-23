@@ -19,30 +19,29 @@ void 		all_len_sprites(t_data *img)
 	}
 }
 
-void 	parse_line(t_data *img, char *str)
+void	parse_line(t_data *img, char *str)
 {
-	int 	count;
+	int	i;
 
-	count = 0;
-	if (str[count] == 'R' && str[count + 1] == ' ')
+	i = 0;
+	if (str[i] == 'R' && str[i + 1] == ' ')
 		fill_width_and_height(img, str);
-	else if (str[count] == 'W' && str[count + 1] == 'E' && str[count + 2] == ' ')
+	else if (str[i] == 'W' && str[i + 1] == 'E' && str[i + 2] == ' ')
 		fill_side(img, str, &img->path.west, &img->flag.west);
-	else if (str[count] == 'N' && str[count + 1] == 'O' && str[count + 2] == ' ')
+	else if (str[i] == 'N' && str[i + 1] == 'O' && str[i + 2] == ' ')
 		fill_side(img, str, &img->path.north, &img->flag.north);
-	else if (str[count] == 'S' && str[count + 1] == 'O' && str[count + 2] == ' ')
+	else if (str[i] == 'S' && str[i + 1] == 'O' && str[i + 2] == ' ')
 		fill_side(img, str, &img->path.south, &img->flag.south);
-	else if (str[count] == 'E' && str[count + 1] == 'A' && str[count + 2] == ' ')
+	else if (str[i] == 'E' && str[i + 1] == 'A' && str[i + 2] == ' ')
 		fill_side(img, str, &img->path.east, &img->flag.east);
-	else if (str[count] == 'S' && str[count + 1] == ' ')
+	else if (str[i] == 'S' && str[i + 1] == ' ')
 		fill_side(img, str, &img->path.sprite, &img->flag.sprite);
-	else if (str[count] == 'F' && str[count + 1] == ' ')
-		fill_color(str, img->color_floor, img, &img->flag.floor);
-	else if (str[count] == 'C' && str[count + 1] == ' ')
-		fill_color(str, img->color_sky, img, &img->flag.sky);
+	else if (str[i] == 'F' && str[i + 1] == ' ')
+		fill_color(str, &img->color_floor, img, &img->flag.floor);
+	else if (str[i] == 'C' && str[i + 1] == ' ')
+		fill_color(str, &img->color_sky, img, &img->flag.sky);
 	else
 		img->flag.error = 1;
-
 }
 
 void 	check_str(char *str, t_data *img)
@@ -78,8 +77,7 @@ char 	*split_lines(char *line, char *list)
 	if (!(list = ft_strjoin(list, "\n")))
 		return (NULL);
 	free(tmp);
-	//if (line != NULL)
-		free(line);
+	free(line);
 	return (list);
 }
 
@@ -171,6 +169,8 @@ void 	func(t_data *img)
 		save_head = save_head->next;
 	}
 	//all_len_sprites(img);
+	//save_screenshot(img); !!!!!!!!!!!!!!!!!!!!!!!!
+	//exit (0);
 	mlx_put_image_to_window(img->mlx, img->mlx_win, img->img, 0, 0);
 }
 
@@ -297,11 +297,10 @@ int		main()
 	t_data img;
 	void_flags_struct(&img);
 
-	img.color_sky = 0x5C5CFF;
-	img.color_floor = 0xDFEEFE;
-
 	parse(&img);
 
+	img.color_sky = 0x5C5CFF;
+	img.color_floor = 0xDFEEFE;
 	img.cube_size = 32;
 	img.calc.dis_to_proj = (img.width / 2.0) / tan(M_PI_6); // distance to proection
 	img.calc.ang_step = M_PI_3 / img.width;
@@ -309,26 +308,7 @@ int		main()
 	img.mlx = mlx_init();
 	img.mlx_win = mlx_new_window(img.mlx, img.width, img.height, "Cub3d - drina");
 
-	// textures 1
-	img.txt1.txt = mlx_xpm_file_to_image(img.mlx, img.path.north, &img.txt1.width, &img.txt1.height);
-	img.txt1.addr = (int*)mlx_get_data_addr(img.txt1.txt, &img.txt1.bits_per_pixel, &img.txt1.line_length , &img.txt1.endian);
-
-	// textures 2
-	img.txt2.txt = mlx_xpm_file_to_image(img.mlx, img.path.south, &img.txt2.width, &img.txt2.height);
-	img.txt2.addr = (int*)mlx_get_data_addr(img.txt2.txt, &img.txt2.bits_per_pixel, &img.txt2.line_length , &img.txt2.endian);
-
-	// textures 3
-	img.txt3.txt = mlx_xpm_file_to_image(img.mlx, img.path.west, &img.txt3.width, &img.txt3.height);
-	img.txt3.addr = (int*)mlx_get_data_addr(img.txt3.txt, &img.txt3.bits_per_pixel, &img.txt3.line_length , &img.txt3.endian);
-
-	// textures 4
-	img.txt4.txt = mlx_xpm_file_to_image(img.mlx, img.path.east, &img.txt4.width, &img.txt4.height);
-	img.txt4.addr = (int*)mlx_get_data_addr(img.txt4.txt, &img.txt1.bits_per_pixel, &img.txt4.line_length , &img.txt4.endian);
-
-	// sprite
-	img.sprite.txt = mlx_xpm_file_to_image(img.mlx, img.path.sprite, &img.sprite.width, &img.sprite.height);
-	img.sprite.addr = (int*)mlx_get_data_addr(img.sprite.txt, &img.sprite.bits_per_pixel, &img.sprite.line_length , &img.sprite.endian);
-
+	get_textures(&img);
 	img.calc.arr_min_len_wall = (double*)malloc(img.width * sizeof(double));
 
 	if (img.map == NULL)

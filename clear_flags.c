@@ -19,5 +19,7 @@ void 	void_flags_struct(t_data *img)
 	img->flag.floor = 0;
 	img->flag.sky = 0;
 	img->flag.error = 0;
+	img->error.no_valid_map = 0;
 	img->error.num_players = 0;
+	img->error.textures = 0;
 }

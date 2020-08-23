@@ -13,6 +13,18 @@ CMakeFiles/cub3d.dir/check_direction_player.c.o: ../libft/get_next_line.h
 CMakeFiles/cub3d.dir/check_direction_player.c.o: ../libft/libft.h
 CMakeFiles/cub3d.dir/check_direction_player.c.o: ../mlx/mlx.h
 
+CMakeFiles/cub3d.dir/check_line.c.o: ../check_line.c
+CMakeFiles/cub3d.dir/check_line.c.o: ../cub3d.h
+CMakeFiles/cub3d.dir/check_line.c.o: ../libft/get_next_line.h
+CMakeFiles/cub3d.dir/check_line.c.o: ../libft/libft.h
+CMakeFiles/cub3d.dir/check_line.c.o: ../mlx/mlx.h
+
+CMakeFiles/cub3d.dir/check_num_lines.c.o: ../check_num_lines.c
+CMakeFiles/cub3d.dir/check_num_lines.c.o: ../cub3d.h
+CMakeFiles/cub3d.dir/check_num_lines.c.o: ../libft/get_next_line.h
+CMakeFiles/cub3d.dir/check_num_lines.c.o: ../libft/libft.h
+CMakeFiles/cub3d.dir/check_num_lines.c.o: ../mlx/mlx.h
+
 CMakeFiles/cub3d.dir/check_player_sight.c.o: ../check_player_sight.c
 CMakeFiles/cub3d.dir/check_player_sight.c.o: ../cub3d.h
 CMakeFiles/cub3d.dir/check_player_sight.c.o: ../libft/get_next_line.h
@@ -49,6 +61,12 @@ CMakeFiles/cub3d.dir/draw_sprite.c.o: ../libft/get_next_line.h
 CMakeFiles/cub3d.dir/draw_sprite.c.o: ../libft/libft.h
 CMakeFiles/cub3d.dir/draw_sprite.c.o: ../mlx/mlx.h
 
+CMakeFiles/cub3d.dir/errors.c.o: ../cub3d.h
+CMakeFiles/cub3d.dir/errors.c.o: ../errors.c
+CMakeFiles/cub3d.dir/errors.c.o: ../libft/get_next_line.h
+CMakeFiles/cub3d.dir/errors.c.o: ../libft/libft.h
+CMakeFiles/cub3d.dir/errors.c.o: ../mlx/mlx.h
+
 CMakeFiles/cub3d.dir/fill_struct.c.o: ../cub3d.h
 CMakeFiles/cub3d.dir/fill_struct.c.o: ../fill_struct.c
 CMakeFiles/cub3d.dir/fill_struct.c.o: ../libft/get_next_line.h
@@ -78,6 +96,18 @@ CMakeFiles/cub3d.dir/flood_fill.c.o: ../flood_fill.c
 CMakeFiles/cub3d.dir/flood_fill.c.o: ../libft/get_next_line.h
 CMakeFiles/cub3d.dir/flood_fill.c.o: ../libft/libft.h
 CMakeFiles/cub3d.dir/flood_fill.c.o: ../mlx/mlx.h
+
+CMakeFiles/cub3d.dir/free_double_arr.c.o: ../cub3d.h
+CMakeFiles/cub3d.dir/free_double_arr.c.o: ../free_double_arr.c
+CMakeFiles/cub3d.dir/free_double_arr.c.o: ../libft/get_next_line.h
+CMakeFiles/cub3d.dir/free_double_arr.c.o: ../libft/libft.h
+CMakeFiles/cub3d.dir/free_double_arr.c.o: ../mlx/mlx.h
+
+CMakeFiles/cub3d.dir/get_textures.c.o: ../cub3d.h
+CMakeFiles/cub3d.dir/get_textures.c.o: ../get_textures.c
+CMakeFiles/cub3d.dir/get_textures.c.o: ../libft/get_next_line.h
+CMakeFiles/cub3d.dir/get_textures.c.o: ../libft/libft.h
+CMakeFiles/cub3d.dir/get_textures.c.o: ../mlx/mlx.h
 
 CMakeFiles/cub3d.dir/libft/ft_atoi.c.o: ../libft/ft_atoi.c
 CMakeFiles/cub3d.dir/libft/ft_atoi.c.o: ../libft/libft.h

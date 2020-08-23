@@ -50,6 +50,7 @@ typedef struct		s_errors
 {
 	int			no_valid_map;
 	int			num_players;
+	int 		textures;
 
 }					t_errors;
 
@@ -144,7 +145,7 @@ void 		swap_two_sprites(t_sprites **head, t_sprites *one, t_sprites *two);
 void 		sort_len_list(t_data *img);
 void 		fill_width_and_height(t_data *img, char *str);
 void 		fill_side(t_data *img, char *str, char **side, int *flag);
-void 		fill_color(char *str, int color, t_data *img, int *flag);
+void 		fill_color(char *str, int *color, t_data *img, int *flag);
 void 		free_double_arr(char **arr);
 void 		void_flags_struct(t_data *img);
 void		find_sprites(t_data *img);
@@ -160,12 +161,13 @@ double 		min_length(double horz, double vert, t_data *img);
 double 		find_vertical(t_data *img);
 double		find_horizontal(t_data *img);
 
-
 int			lst_size(t_sprites *lst);
 int 		check_direction_player(int sym, t_data *img);
 int 		check_flags_struct(t_data *img);
 int 		check_line(char *str);
 int 		check_num_lines(char **str, int c);
+int			get_color(t_data *data, int x, int y);
+int			save_screenshot(t_data *img);
 
 t_sprites 	last_sprite(t_sprites *lst);
 t_sprites 	*lstnew(int y, int x, int cube_size);

@@ -7,7 +7,7 @@ SRC = cub3d.c quarters.c draw.c min_length.c find_vertical.c find_horizontal.c s
 		check_direction_player.c check_player_sight.c clear_flags.c fill_struct.c find_sprites.c \
 		draw_pixel_sprite.c new_sprite.c add_back_sprite.c draw_sprite.c my_mlx_pixel_put.c \
 		flood_fill.c get_textures.c errors.c check_line.c free_double_arr.c check_num_lines.c \
-
+		bmp.c
 
 SRCO = $(SRC:.c=.o)
 

@@ -90,6 +90,12 @@
 		<Unit filename="/Users/drina/drina/cub3d/check_direction_player.c">
 			<Option target="cub3d"/>
 		</Unit>
+		<Unit filename="/Users/drina/drina/cub3d/check_line.c">
+			<Option target="cub3d"/>
+		</Unit>
+		<Unit filename="/Users/drina/drina/cub3d/check_num_lines.c">
+			<Option target="cub3d"/>
+		</Unit>
 		<Unit filename="/Users/drina/drina/cub3d/check_player_sight.c">
 			<Option target="cub3d"/>
 		</Unit>
@@ -111,6 +117,9 @@
 		<Unit filename="/Users/drina/drina/cub3d/draw_sprite.c">
 			<Option target="cub3d"/>
 		</Unit>
+		<Unit filename="/Users/drina/drina/cub3d/errors.c">
+			<Option target="cub3d"/>
+		</Unit>
 		<Unit filename="/Users/drina/drina/cub3d/fill_struct.c">
 			<Option target="cub3d"/>
 		</Unit>
@@ -124,6 +133,12 @@
 			<Option target="cub3d"/>
 		</Unit>
 		<Unit filename="/Users/drina/drina/cub3d/flood_fill.c">
+			<Option target="cub3d"/>
+		</Unit>
+		<Unit filename="/Users/drina/drina/cub3d/free_double_arr.c">
+			<Option target="cub3d"/>
+		</Unit>
+		<Unit filename="/Users/drina/drina/cub3d/get_textures.c">
 			<Option target="cub3d"/>
 		</Unit>
 		<Unit filename="/Users/drina/drina/cub3d/libft/ft_atoi.c">

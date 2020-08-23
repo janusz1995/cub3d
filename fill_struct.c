@@ -19,6 +19,8 @@ void 	fill_width_and_height(t_data *img, char *str)
 	{
 		img->width = ft_atoi(tmp[1]);
 		img->height = ft_atoi(tmp[2]);
+		img->flag.width = 1;
+		img->flag.height = 1;
 	}
 	else
 		img->flag.error = 1;
@@ -41,23 +43,17 @@ void 	fill_side(t_data *img, char *str, char **side, int *flag)
 }
 
 
-void 	fill_color(char *str, int color, t_data *img, int *flag)
+void 	fill_color(char *str, int *color, t_data *img, int *flag)
 {
 	char 	**tmp;
 
 	tmp = ft_split(&str[2], ',');
 	if (check_num_lines(tmp, 3) == 1 && check_line(tmp[0]) && check_line(tmp[1]) && check_line(tmp[2]))
 	{
-		color = 0 << 24 | ft_atoi(tmp[0]) << 16 | ft_atoi(tmp[1]) << 8 | ft_atoi(tmp[2]) << 0;
+		(*color) = 0 << 24 | ft_atoi(tmp[0]) << 16 | ft_atoi(tmp[1]) << 8 | ft_atoi(tmp[2]) << 0;
 		(*flag) = 1;
 	}
 	else
 		img->flag.error = 1;
-	//free_double_arr(tmp); //need free - but segfault
-	int count;
-
-	count = 0;
-	while (tmp[count] != NULL)
-		free(tmp[count++]);
-	free(tmp);
+	free_double_arr(tmp);
 }

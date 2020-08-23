@@ -8,3 +8,13 @@ void            my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
 }
+
+int		get_color(t_data *data, int x, int y)
+{
+	char    *dst;
+	int		color;
+
+	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	color = *(int*)dst;
+	return (color);
+}

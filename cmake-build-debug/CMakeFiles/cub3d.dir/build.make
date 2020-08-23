@@ -896,6 +896,71 @@ CMakeFiles/cub3d.dir/flood_fill.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/cub3d.dir/flood_fill.c.s"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/drina/drina/cub3d/flood_fill.c -o CMakeFiles/cub3d.dir/flood_fill.c.s
 
+CMakeFiles/cub3d.dir/check_num_lines.c.o: CMakeFiles/cub3d.dir/flags.make
+CMakeFiles/cub3d.dir/check_num_lines.c.o: ../check_num_lines.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/drina/drina/cub3d/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_64) "Building C object CMakeFiles/cub3d.dir/check_num_lines.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/cub3d.dir/check_num_lines.c.o   -c /Users/drina/drina/cub3d/check_num_lines.c
+
+CMakeFiles/cub3d.dir/check_num_lines.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/cub3d.dir/check_num_lines.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/drina/drina/cub3d/check_num_lines.c > CMakeFiles/cub3d.dir/check_num_lines.c.i
+
+CMakeFiles/cub3d.dir/check_num_lines.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/cub3d.dir/check_num_lines.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/drina/drina/cub3d/check_num_lines.c -o CMakeFiles/cub3d.dir/check_num_lines.c.s
+
+CMakeFiles/cub3d.dir/free_double_arr.c.o: CMakeFiles/cub3d.dir/flags.make
+CMakeFiles/cub3d.dir/free_double_arr.c.o: ../free_double_arr.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/drina/drina/cub3d/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_65) "Building C object CMakeFiles/cub3d.dir/free_double_arr.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/cub3d.dir/free_double_arr.c.o   -c /Users/drina/drina/cub3d/free_double_arr.c
+
+CMakeFiles/cub3d.dir/free_double_arr.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/cub3d.dir/free_double_arr.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/drina/drina/cub3d/free_double_arr.c > CMakeFiles/cub3d.dir/free_double_arr.c.i
+
+CMakeFiles/cub3d.dir/free_double_arr.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/cub3d.dir/free_double_arr.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/drina/drina/cub3d/free_double_arr.c -o CMakeFiles/cub3d.dir/free_double_arr.c.s
+
+CMakeFiles/cub3d.dir/check_line.c.o: CMakeFiles/cub3d.dir/flags.make
+CMakeFiles/cub3d.dir/check_line.c.o: ../check_line.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/drina/drina/cub3d/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_66) "Building C object CMakeFiles/cub3d.dir/check_line.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/cub3d.dir/check_line.c.o   -c /Users/drina/drina/cub3d/check_line.c
+
+CMakeFiles/cub3d.dir/check_line.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/cub3d.dir/check_line.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/drina/drina/cub3d/check_line.c > CMakeFiles/cub3d.dir/check_line.c.i
+
+CMakeFiles/cub3d.dir/check_line.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/cub3d.dir/check_line.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/drina/drina/cub3d/check_line.c -o CMakeFiles/cub3d.dir/check_line.c.s
+
+CMakeFiles/cub3d.dir/errors.c.o: CMakeFiles/cub3d.dir/flags.make
+CMakeFiles/cub3d.dir/errors.c.o: ../errors.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/drina/drina/cub3d/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_67) "Building C object CMakeFiles/cub3d.dir/errors.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/cub3d.dir/errors.c.o   -c /Users/drina/drina/cub3d/errors.c
+
+CMakeFiles/cub3d.dir/errors.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/cub3d.dir/errors.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/drina/drina/cub3d/errors.c > CMakeFiles/cub3d.dir/errors.c.i
+
+CMakeFiles/cub3d.dir/errors.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/cub3d.dir/errors.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/drina/drina/cub3d/errors.c -o CMakeFiles/cub3d.dir/errors.c.s
+
+CMakeFiles/cub3d.dir/get_textures.c.o: CMakeFiles/cub3d.dir/flags.make
+CMakeFiles/cub3d.dir/get_textures.c.o: ../get_textures.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/drina/drina/cub3d/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_68) "Building C object CMakeFiles/cub3d.dir/get_textures.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/cub3d.dir/get_textures.c.o   -c /Users/drina/drina/cub3d/get_textures.c
+
+CMakeFiles/cub3d.dir/get_textures.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/cub3d.dir/get_textures.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/drina/drina/cub3d/get_textures.c > CMakeFiles/cub3d.dir/get_textures.c.i
+
+CMakeFiles/cub3d.dir/get_textures.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/cub3d.dir/get_textures.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/drina/drina/cub3d/get_textures.c -o CMakeFiles/cub3d.dir/get_textures.c.s
+
 # Object files for target cub3d
 cub3d_OBJECTS = \
 "CMakeFiles/cub3d.dir/libft/ft_atoi.c.o" \
@@ -960,7 +1025,12 @@ cub3d_OBJECTS = \
 "CMakeFiles/cub3d.dir/add_back_sprite.c.o" \
 "CMakeFiles/cub3d.dir/draw_sprite.c.o" \
 "CMakeFiles/cub3d.dir/my_mlx_pixel_put.c.o" \
-"CMakeFiles/cub3d.dir/flood_fill.c.o"
+"CMakeFiles/cub3d.dir/flood_fill.c.o" \
+"CMakeFiles/cub3d.dir/check_num_lines.c.o" \
+"CMakeFiles/cub3d.dir/free_double_arr.c.o" \
+"CMakeFiles/cub3d.dir/check_line.c.o" \
+"CMakeFiles/cub3d.dir/errors.c.o" \
+"CMakeFiles/cub3d.dir/get_textures.c.o"
 
 # External object files for target cub3d
 cub3d_EXTERNAL_OBJECTS =
@@ -1028,9 +1098,14 @@ cub3d: CMakeFiles/cub3d.dir/add_back_sprite.c.o
 cub3d: CMakeFiles/cub3d.dir/draw_sprite.c.o
 cub3d: CMakeFiles/cub3d.dir/my_mlx_pixel_put.c.o
 cub3d: CMakeFiles/cub3d.dir/flood_fill.c.o
+cub3d: CMakeFiles/cub3d.dir/check_num_lines.c.o
+cub3d: CMakeFiles/cub3d.dir/free_double_arr.c.o
+cub3d: CMakeFiles/cub3d.dir/check_line.c.o
+cub3d: CMakeFiles/cub3d.dir/errors.c.o
+cub3d: CMakeFiles/cub3d.dir/get_textures.c.o
 cub3d: CMakeFiles/cub3d.dir/build.make
 cub3d: CMakeFiles/cub3d.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/drina/drina/cub3d/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_64) "Linking C executable cub3d"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/drina/drina/cub3d/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_69) "Linking C executable cub3d"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/cub3d.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

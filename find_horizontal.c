@@ -1,18 +1,12 @@
 
 #include "cub3d.h"
 
-double		find_horizontal(t_data *img)
+void 	horz_x_and_y(t_data *img)
 {
-	double	horz_dis_y;
-	double	horz_dis_x;
-
 	if (img->player.ang_start > M_PI && img->player.ang_start < (M_PI * 2))
 		img->horz_y = (int) (img->player.y / img->cube_size) * img->cube_size - 0.00000000001; //координата точки пересечения с 1 квадратом Y
-	else if (img->player.ang_start == M_PI || img->player.ang_start == (M_PI * 2) || img->player.ang_start == 0)
-		return (INFINITY);
 	else
 		img->horz_y = (int) (img->player.y / img->cube_size) * img->cube_size + img->cube_size;
-
 	if (img->player.ang_start > M_PI && img->player.ang_start < (M_PI * 2))
 		img->calc.dis_y = img->player.y - img->horz_y;
 	else
@@ -33,11 +27,20 @@ double		find_horizontal(t_data *img)
 		else
 			img->horz_x = img->calc.dis_y * tan(img->player.ang_start - (M_PI + M_PI_2)) + img->player.x;
 	}
+}
+
+double		find_horizontal(t_data *img)
+{
+	double	horz_dis_y;
+	double	horz_dis_x;
+
+	if (img->player.ang_start == M_PI || img->player.ang_start == (M_PI * 2) || img->player.ang_start == 0)
+		return (INFINITY);
+	else
+		horz_x_and_y(img);
 	img->calc.dis = 0;
 	while (img->horz_y > 0 && img->horz_x > 0 && img->horz_y < 14*img->cube_size && img->horz_x < 35*img->cube_size && img->map[(unsigned int)img->horz_y/img->cube_size][(unsigned int)img->horz_x/img->cube_size] != '1')
-	{
 		quarters_horz(img);
-	}
 	if (img->horz_y > 0 && img->horz_x > 0 && img->horz_y < 14*img->cube_size && img->horz_x < 35*img->cube_size && img->map[(unsigned int)img->horz_y/img->cube_size][(unsigned int)img->horz_x/img->cube_size] == '1')
 	{
 		horz_dis_y = img->player.y - img->horz_y;

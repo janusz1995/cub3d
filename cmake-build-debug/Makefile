@@ -197,6 +197,60 @@ check_direction_player.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/check_direction_player.c.s
 .PHONY : check_direction_player.c.s
 
+check_line.o: check_line.c.o
+
+.PHONY : check_line.o
+
+# target to build an object file
+check_line.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/check_line.c.o
+.PHONY : check_line.c.o
+
+check_line.i: check_line.c.i
+
+.PHONY : check_line.i
+
+# target to preprocess a source file
+check_line.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/check_line.c.i
+.PHONY : check_line.c.i
+
+check_line.s: check_line.c.s
+
+.PHONY : check_line.s
+
+# target to generate assembly for a file
+check_line.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/check_line.c.s
+.PHONY : check_line.c.s
+
+check_num_lines.o: check_num_lines.c.o
+
+.PHONY : check_num_lines.o
+
+# target to build an object file
+check_num_lines.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/check_num_lines.c.o
+.PHONY : check_num_lines.c.o
+
+check_num_lines.i: check_num_lines.c.i
+
+.PHONY : check_num_lines.i
+
+# target to preprocess a source file
+check_num_lines.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/check_num_lines.c.i
+.PHONY : check_num_lines.c.i
+
+check_num_lines.s: check_num_lines.c.s
+
+.PHONY : check_num_lines.s
+
+# target to generate assembly for a file
+check_num_lines.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/check_num_lines.c.s
+.PHONY : check_num_lines.c.s
+
 check_player_sight.o: check_player_sight.c.o
 
 .PHONY : check_player_sight.o
@@ -359,6 +413,33 @@ draw_sprite.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/draw_sprite.c.s
 .PHONY : draw_sprite.c.s
 
+errors.o: errors.c.o
+
+.PHONY : errors.o
+
+# target to build an object file
+errors.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/errors.c.o
+.PHONY : errors.c.o
+
+errors.i: errors.c.i
+
+.PHONY : errors.i
+
+# target to preprocess a source file
+errors.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/errors.c.i
+.PHONY : errors.c.i
+
+errors.s: errors.c.s
+
+.PHONY : errors.s
+
+# target to generate assembly for a file
+errors.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/errors.c.s
+.PHONY : errors.c.s
+
 fill_struct.o: fill_struct.c.o
 
 .PHONY : fill_struct.o
@@ -493,6 +574,60 @@ flood_fill.s: flood_fill.c.s
 flood_fill.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/flood_fill.c.s
 .PHONY : flood_fill.c.s
+
+free_double_arr.o: free_double_arr.c.o
+
+.PHONY : free_double_arr.o
+
+# target to build an object file
+free_double_arr.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/free_double_arr.c.o
+.PHONY : free_double_arr.c.o
+
+free_double_arr.i: free_double_arr.c.i
+
+.PHONY : free_double_arr.i
+
+# target to preprocess a source file
+free_double_arr.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/free_double_arr.c.i
+.PHONY : free_double_arr.c.i
+
+free_double_arr.s: free_double_arr.c.s
+
+.PHONY : free_double_arr.s
+
+# target to generate assembly for a file
+free_double_arr.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/free_double_arr.c.s
+.PHONY : free_double_arr.c.s
+
+get_textures.o: get_textures.c.o
+
+.PHONY : get_textures.o
+
+# target to build an object file
+get_textures.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/get_textures.c.o
+.PHONY : get_textures.c.o
+
+get_textures.i: get_textures.c.i
+
+.PHONY : get_textures.i
+
+# target to preprocess a source file
+get_textures.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/get_textures.c.i
+.PHONY : get_textures.c.i
+
+get_textures.s: get_textures.c.s
+
+.PHONY : get_textures.s
+
+# target to generate assembly for a file
+get_textures.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/get_textures.c.s
+.PHONY : get_textures.c.s
 
 libft/ft_atoi.o: libft/ft_atoi.c.o
 
@@ -1859,6 +1994,12 @@ help:
 	@echo "... check_direction_player.o"
 	@echo "... check_direction_player.i"
 	@echo "... check_direction_player.s"
+	@echo "... check_line.o"
+	@echo "... check_line.i"
+	@echo "... check_line.s"
+	@echo "... check_num_lines.o"
+	@echo "... check_num_lines.i"
+	@echo "... check_num_lines.s"
 	@echo "... check_player_sight.o"
 	@echo "... check_player_sight.i"
 	@echo "... check_player_sight.s"
@@ -1877,6 +2018,9 @@ help:
 	@echo "... draw_sprite.o"
 	@echo "... draw_sprite.i"
 	@echo "... draw_sprite.s"
+	@echo "... errors.o"
+	@echo "... errors.i"
+	@echo "... errors.s"
 	@echo "... fill_struct.o"
 	@echo "... fill_struct.i"
 	@echo "... fill_struct.s"
@@ -1892,6 +2036,12 @@ help:
 	@echo "... flood_fill.o"
 	@echo "... flood_fill.i"
 	@echo "... flood_fill.s"
+	@echo "... free_double_arr.o"
+	@echo "... free_double_arr.i"
+	@echo "... free_double_arr.s"
+	@echo "... get_textures.o"
+	@echo "... get_textures.i"
+	@echo "... get_textures.s"
 	@echo "... libft/ft_atoi.o"
 	@echo "... libft/ft_atoi.i"
 	@echo "... libft/ft_atoi.s"

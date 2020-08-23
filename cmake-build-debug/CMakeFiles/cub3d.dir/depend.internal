@@ -13,6 +13,18 @@ CMakeFiles/cub3d.dir/check_direction_player.c.o
  /Users/drina/drina/cub3d/libft/get_next_line.h
  /Users/drina/drina/cub3d/libft/libft.h
  /Users/drina/drina/cub3d/mlx/mlx.h
+CMakeFiles/cub3d.dir/check_line.c.o
+ /Users/drina/drina/cub3d/check_line.c
+ /Users/drina/drina/cub3d/cub3d.h
+ /Users/drina/drina/cub3d/libft/get_next_line.h
+ /Users/drina/drina/cub3d/libft/libft.h
+ /Users/drina/drina/cub3d/mlx/mlx.h
+CMakeFiles/cub3d.dir/check_num_lines.c.o
+ /Users/drina/drina/cub3d/check_num_lines.c
+ /Users/drina/drina/cub3d/cub3d.h
+ /Users/drina/drina/cub3d/libft/get_next_line.h
+ /Users/drina/drina/cub3d/libft/libft.h
+ /Users/drina/drina/cub3d/mlx/mlx.h
 CMakeFiles/cub3d.dir/check_player_sight.c.o
  /Users/drina/drina/cub3d/check_player_sight.c
  /Users/drina/drina/cub3d/cub3d.h
@@ -49,6 +61,12 @@ CMakeFiles/cub3d.dir/draw_sprite.c.o
  /Users/drina/drina/cub3d/libft/get_next_line.h
  /Users/drina/drina/cub3d/libft/libft.h
  /Users/drina/drina/cub3d/mlx/mlx.h
+CMakeFiles/cub3d.dir/errors.c.o
+ /Users/drina/drina/cub3d/cub3d.h
+ /Users/drina/drina/cub3d/errors.c
+ /Users/drina/drina/cub3d/libft/get_next_line.h
+ /Users/drina/drina/cub3d/libft/libft.h
+ /Users/drina/drina/cub3d/mlx/mlx.h
 CMakeFiles/cub3d.dir/fill_struct.c.o
  /Users/drina/drina/cub3d/cub3d.h
  /Users/drina/drina/cub3d/fill_struct.c
@@ -76,6 +94,18 @@ CMakeFiles/cub3d.dir/find_vertical.c.o
 CMakeFiles/cub3d.dir/flood_fill.c.o
  /Users/drina/drina/cub3d/cub3d.h
  /Users/drina/drina/cub3d/flood_fill.c
+ /Users/drina/drina/cub3d/libft/get_next_line.h
+ /Users/drina/drina/cub3d/libft/libft.h
+ /Users/drina/drina/cub3d/mlx/mlx.h
+CMakeFiles/cub3d.dir/free_double_arr.c.o
+ /Users/drina/drina/cub3d/cub3d.h
+ /Users/drina/drina/cub3d/free_double_arr.c
+ /Users/drina/drina/cub3d/libft/get_next_line.h
+ /Users/drina/drina/cub3d/libft/libft.h
+ /Users/drina/drina/cub3d/mlx/mlx.h
+CMakeFiles/cub3d.dir/get_textures.c.o
+ /Users/drina/drina/cub3d/cub3d.h
+ /Users/drina/drina/cub3d/get_textures.c
  /Users/drina/drina/cub3d/libft/get_next_line.h
  /Users/drina/drina/cub3d/libft/libft.h
  /Users/drina/drina/cub3d/mlx/mlx.h

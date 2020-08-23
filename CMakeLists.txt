@@ -74,4 +74,11 @@ add_executable(cub3d
         add_back_sprite.c
         draw_sprite.c
         my_mlx_pixel_put.c
-        flood_fill.c)
+        flood_fill.c
+        check_num_lines.c
+        free_double_arr.c
+        check_line.c
+        errors.c
+        get_textures.c
+        )
+

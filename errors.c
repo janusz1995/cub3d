@@ -10,7 +10,12 @@ void 	errors(t_data *img)
 	}
 	if (img->error.num_players != 1)
 	{
-		ft_putstr_fd("the number of players is not correct\n", 1);
+		ft_putstr_fd("The Number of Players is Not correct\n", 1);
+		exit(0);
+	}
+	if (img->error.textures == 1)
+	{
+		ft_putstr_fd("Failed to get Textures\n", 1);
 		exit(0);
 	}
 }
