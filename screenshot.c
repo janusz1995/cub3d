@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_direction_player.c                           :+:      :+:    :+:   */
+/*   screenshot.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: drina <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/24 12:25:50 by drina             #+#    #+#             */
-/*   Updated: 2020/08/24 12:25:51 by drina            ###   ########.fr       */
+/*   Created: 2020/08/25 00:02:18 by drina             #+#    #+#             */
+/*   Updated: 2020/08/25 00:02:19 by drina            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int 	check_direction_player(int sym, t_data *img)
+void	screenshot(t_data *img)
 {
-	if (sym == 'N' || sym == 'S' || sym == 'W' || sym == 'E')
+	if (img->flag.screenshot)
 	{
-		img->player.ang_fov = M_PI / 3;
-		if (sym == 'E')
-			img->player.angle = 0; //  0/360
-		else if (sym == 'S')
-			img->player.angle = M_PI_2; // 90
-		else if (sym == 'W')
-			img->player.angle = M_PI; // 180
-		else
-			img->player.angle = M_PI_2 * 3; // 270
-		return (1);
+		if (!(save_screenshot(img)))
+			ft_putstr_fd("Error:\nFailed to create screenshot\n",1);
+		exit(0);
 	}
-	else
-		return (0);
 }

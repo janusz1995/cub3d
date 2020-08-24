@@ -1,10 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort_by_len_list.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: drina <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/24 12:31:21 by drina             #+#    #+#             */
+/*   Updated: 2020/08/24 12:31:23 by drina            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cub3d.h"
 
-void 				sort_len_list(t_data *img)
+void 			sort_len_list(t_data *img)
 {
 	t_sprites	*tmp;
-	int 		flag;
+	int			flag;
 	
 	flag = 1;
 	while (flag)
@@ -26,7 +37,7 @@ void 				sort_len_list(t_data *img)
 
 /// Swap 2 element in list
 
-void 	swap_two_sprites(t_sprites **head, t_sprites *one, t_sprites *two)
+void 		swap_two_sprites(t_sprites **head, t_sprites *one, t_sprites *two)
 {
 	t_sprites 	*tmp;
 	t_sprites	*root;
@@ -43,7 +54,6 @@ void 	swap_two_sprites(t_sprites **head, t_sprites *one, t_sprites *two)
 	{
 		while (root->next != one)
 			root = root->next;
-
 		tmp = two->next;
 		two->next = one;
 		one->next = tmp;

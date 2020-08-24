@@ -1,32 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_direction_player.c                           :+:      :+:    :+:   */
+/*   all_free.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: drina <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/24 12:25:50 by drina             #+#    #+#             */
-/*   Updated: 2020/08/24 12:25:51 by drina            ###   ########.fr       */
+/*   Created: 2020/08/24 23:49:33 by drina             #+#    #+#             */
+/*   Updated: 2020/08/24 23:49:34 by drina            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int 	check_direction_player(int sym, t_data *img)
+void 	all_free(t_data *img)
 {
-	if (sym == 'N' || sym == 'S' || sym == 'W' || sym == 'E')
-	{
-		img->player.ang_fov = M_PI / 3;
-		if (sym == 'E')
-			img->player.angle = 0; //  0/360
-		else if (sym == 'S')
-			img->player.angle = M_PI_2; // 90
-		else if (sym == 'W')
-			img->player.angle = M_PI; // 180
-		else
-			img->player.angle = M_PI_2 * 3; // 270
-		return (1);
-	}
-	else
-		return (0);
+	free(img->map);
+	free(img->calc.arr_min_len_wall);
+	free(img->flood_map);
 }

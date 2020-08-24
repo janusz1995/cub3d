@@ -1,5 +1,40 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   find_vertical.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: drina <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/24 12:29:34 by drina             #+#    #+#             */
+/*   Updated: 2020/08/24 12:29:37 by drina            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cub3d.h"
+
+static int		check_cond_one(t_data *img)
+{
+	if (img->vert_y > 0 && img->vert_x > 0 && img->vert_x <
+				img->calc.x_max * img->cube_size &&
+			img->vert_y < img->calc.y_max*img->cube_size &&
+			img->map[(unsigned int)img->vert_y/img->cube_size]
+					[(unsigned int)img->vert_x/img->cube_size] == '1')
+		return (1);
+	else
+		return (0);
+}
+
+static int		check_cond_no_one(t_data *img)
+{
+	if (img->vert_y > 0 && img->vert_x > 0 && img->vert_x <
+			img->calc.x_max * img->cube_size &&
+		img->vert_y < img->calc.y_max*img->cube_size &&
+		img->map[(unsigned int)img->vert_y/img->cube_size]
+		[(unsigned int)img->vert_x/img->cube_size] != '1')
+		return (1);
+	else
+		return (0);
+}
 
 void 	vert_x_and_y(t_data *img)
 {
@@ -38,10 +73,9 @@ double 		find_vertical(t_data *img)
 		return (INFINITY);
 	else
 		vert_x_and_y(img);
-	img->calc.dis = 0;
-	while (img->vert_y > 0 && img->vert_x > 0 && img->vert_x < 35 * img->cube_size && img->vert_y < 14*img->cube_size && img->map[(unsigned int)img->vert_y/img->cube_size][(unsigned int)img->vert_x/img->cube_size] != '1')
+	while (check_cond_no_one(img))
 		quarters_vert(img);
-	if (img->vert_y > 0 && img->vert_x > 0 && img->vert_x < 35 * img->cube_size && img->vert_y < 14*img->cube_size && img->map[(unsigned int)img->vert_y/img->cube_size][(unsigned int)img->vert_x/img->cube_size] == '1')
+	if (check_cond_one(img))
 	{
 		vert_dis_y = img->player.y - img->vert_y;
 		vert_dis_x = img->player.x - img->vert_x;

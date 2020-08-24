@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_direction_player.c                           :+:      :+:    :+:   */
+/*   x_and_y_max.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: drina <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/24 12:25:50 by drina             #+#    #+#             */
-/*   Updated: 2020/08/24 12:25:51 by drina            ###   ########.fr       */
+/*   Created: 2020/08/25 00:15:37 by drina             #+#    #+#             */
+/*   Updated: 2020/08/25 00:15:40 by drina            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int 	check_direction_player(int sym, t_data *img)
+void 	x_and_y_max(t_data *img)
 {
-	if (sym == 'N' || sym == 'S' || sym == 'W' || sym == 'E')
+	int i;
+	int j;
+
+	i = 0;
+	while (img->map[i])
 	{
-		img->player.ang_fov = M_PI / 3;
-		if (sym == 'E')
-			img->player.angle = 0; //  0/360
-		else if (sym == 'S')
-			img->player.angle = M_PI_2; // 90
-		else if (sym == 'W')
-			img->player.angle = M_PI; // 180
-		else
-			img->player.angle = M_PI_2 * 3; // 270
-		return (1);
+		j = 0;
+		while (img->map[i][j])
+		{
+			if (j > img->calc.x_max)
+				img->calc.x_max = j;
+			j++;
+		}
+		i++;
 	}
-	else
-		return (0);
+	img->calc.x_max++;
+	img->calc.y_max = i;
 }

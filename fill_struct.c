@@ -1,6 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fill_struct.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: drina <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/24 12:28:34 by drina             #+#    #+#             */
+/*   Updated: 2020/08/24 12:28:36 by drina            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cub3d.h"
-#include <stdio.h>
 
 int 	check_flags_struct(t_data *img)
 {
@@ -9,18 +19,19 @@ int 	check_flags_struct(t_data *img)
 				&& img->flag.west && img->flag.east && img->flag.sprite);
 }
 
-
 void 	fill_width_and_height(t_data *img, char *str)
 {
 	char 	**tmp;
 
 	tmp = ft_split(str, ' ');
-	if (check_num_lines(tmp, 3) == 1 && (check_line(tmp[1]) && check_line(tmp[2])))
+	if (check_num_lines(tmp, 3) == 1 && (check_line(tmp[1]) &&
+			check_line(tmp[2])))
 	{
 		img->width = ft_atoi(tmp[1]);
 		img->height = ft_atoi(tmp[2]);
 		img->flag.width = 1;
 		img->flag.height = 1;
+		check_max_and_min_screensize(img);
 	}
 	else
 		img->flag.error = 1;
@@ -42,15 +53,16 @@ void 	fill_side(t_data *img, char *str, char **side, int *flag)
 	free_double_arr(tmp);
 }
 
-
 void 	fill_color(char *str, int *color, t_data *img, int *flag)
 {
 	char 	**tmp;
 
 	tmp = ft_split(&str[2], ',');
-	if (check_num_lines(tmp, 3) == 1 && check_line(tmp[0]) && check_line(tmp[1]) && check_line(tmp[2]))
+	if (check_num_lines(tmp, 3) == 1 && check_line(tmp[0]) &&
+			check_line(tmp[1]) && check_line(tmp[2]))
 	{
-		(*color) = 0 << 24 | ft_atoi(tmp[0]) << 16 | ft_atoi(tmp[1]) << 8 | ft_atoi(tmp[2]) << 0;
+		(*color) = 0 << 24 | ft_atoi(tmp[0]) << 16 | ft_atoi(tmp[1]) << 8 |
+								ft_atoi(tmp[2]) << 0;
 		(*flag) = 1;
 	}
 	else

@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_direction_player.c                           :+:      :+:    :+:   */
+/*   split_lines.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: drina <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/24 12:25:50 by drina             #+#    #+#             */
-/*   Updated: 2020/08/24 12:25:51 by drina            ###   ########.fr       */
+/*   Created: 2020/08/24 22:45:08 by drina             #+#    #+#             */
+/*   Updated: 2020/08/24 22:45:10 by drina            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int 	check_direction_player(int sym, t_data *img)
+char 	*split_lines(char *line, char *list)
 {
-	if (sym == 'N' || sym == 'S' || sym == 'W' || sym == 'E')
-	{
-		img->player.ang_fov = M_PI / 3;
-		if (sym == 'E')
-			img->player.angle = 0; //  0/360
-		else if (sym == 'S')
-			img->player.angle = M_PI_2; // 90
-		else if (sym == 'W')
-			img->player.angle = M_PI; // 180
-		else
-			img->player.angle = M_PI_2 * 3; // 270
-		return (1);
-	}
-	else
-		return (0);
+	char *tmp;
+
+	tmp = list;
+	if (!(list = ft_strjoin(list, line)))
+		return (NULL);
+	free(tmp);
+	tmp = list;
+	if (!(list = ft_strjoin(list, "\n")))
+		return (NULL);
+	free(tmp);
+	free(line);
+	return (list);
 }

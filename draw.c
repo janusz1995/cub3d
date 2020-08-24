@@ -6,7 +6,7 @@
 /*   By: drina <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/07 22:44:28 by drina             #+#    #+#             */
-/*   Updated: 2020/08/07 22:44:38 by drina            ###   ########.fr       */
+/*   Updated: 2020/08/24 12:27:44 by drina            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void 	draw_floor(t_data *img, int obj_start)
 
 	floor = obj_start;
 	while (floor < img->height - 1)
-		my_mlx_pixel_put(img, img->pixel, floor++, img->color_floor);//0xDFEEFE);
+		my_mlx_pixel_put(img, img->pixel, floor++, img->color_floor);
 }
 
 void 	draw_sky(t_data *img, int obj_start)
@@ -45,7 +45,7 @@ void 	draw_sky(t_data *img, int obj_start)
 
 	sky = 0;
 	while (sky < obj_start)
-		my_mlx_pixel_put(img, img->pixel, sky++, img->color_sky);//0x5C5CFF);
+		my_mlx_pixel_put(img, img->pixel, sky++, img->color_sky);
 }
 
 void 	draw_wall(t_data *img)

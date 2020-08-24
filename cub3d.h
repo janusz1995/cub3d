@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: drina <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/24 12:27:10 by drina             #+#    #+#             */
+/*   Updated: 2020/08/24 12:27:12 by drina            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 
 
 
@@ -43,6 +55,8 @@ typedef struct  s_flags {
 	int			floor;
 	int			sprite;
 	int 		error;
+	int 		screenshot;
+
 
 }               t_flags;
 
@@ -90,6 +104,8 @@ typedef struct  s_calc {
 	int 		sprite_y;
 	double		sprite_dir;
 	double 		ang_step;
+	int 		x_max;
+	int 		y_max;
 }               t_calc;
 
 typedef struct  s_data {
@@ -156,6 +172,17 @@ void 		flood_fill(t_data *img, int x, int y, char **map, char new_sym);
 void 		get_textures(t_data *img);
 void 		errors(t_data *img);
 void 		free_double_arr(char **arr);
+void		func(t_data *img);
+void		check_max_and_min_screensize(t_data *img);
+void 		all_free(t_data *img);
+void		const_param(t_data *img);
+void		all_free(t_data *img);
+void		parse_line(t_data *img, char *str);
+void		check_str(char *str, t_data *img);
+void		check_argv(int argc, char **argv, t_data *img);
+void		move_sprite(t_data *img);
+void		screenshot(t_data *img);
+void		x_and_y_max(t_data *img);
 
 double 		min_length(double horz, double vert, t_data *img);
 double 		find_vertical(t_data *img);
@@ -168,6 +195,9 @@ int 		check_line(char *str);
 int 		check_num_lines(char **str, int c);
 int			get_color(t_data *data, int x, int y);
 int			save_screenshot(t_data *img);
+int 		key(int keycode, t_data *img);
+
+char		*split_lines(char *line, char *list);
 
 t_sprites 	last_sprite(t_sprites *lst);
 t_sprites 	*lstnew(int y, int x, int cube_size);

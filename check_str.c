@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_direction_player.c                           :+:      :+:    :+:   */
+/*   check_str.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: drina <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/24 12:25:50 by drina             #+#    #+#             */
-/*   Updated: 2020/08/24 12:25:51 by drina            ###   ########.fr       */
+/*   Created: 2020/08/24 23:49:47 by drina             #+#    #+#             */
+/*   Updated: 2020/08/24 23:49:48 by drina            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int 	check_direction_player(int sym, t_data *img)
+void 	check_str(char *str, t_data *img)
 {
-	if (sym == 'N' || sym == 'S' || sym == 'W' || sym == 'E')
+	int count;
+
+	count = 0;
+	while (str[count] == ' ')
+		count++;
+	if (str[count] == '\n' || str[count] == '\0')
 	{
-		img->player.ang_fov = M_PI / 3;
-		if (sym == 'E')
-			img->player.angle = 0; //  0/360
-		else if (sym == 'S')
-			img->player.angle = M_PI_2; // 90
-		else if (sym == 'W')
-			img->player.angle = M_PI; // 180
-		else
-			img->player.angle = M_PI_2 * 3; // 270
-		return (1);
+		free(str);
+		str = NULL;
 	}
 	else
-		return (0);
+	if (ft_isalpha(str[count]))
+		parse_line(img, &str[count]);
+	else
+		img->flag.error = 1;
 }
