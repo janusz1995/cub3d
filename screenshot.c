@@ -17,7 +17,7 @@ void	screenshot(t_data *img)
 	if (img->flag.screenshot)
 	{
 		if (!(save_screenshot(img)))
-			ft_putstr_fd("Error:\nFailed to create screenshot\n",1);
+			ft_putstr_fd("Error:\nFailed to create screenshot\n", 1);
 		exit(0);
 	}
 }

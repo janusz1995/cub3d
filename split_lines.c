@@ -12,18 +12,20 @@
 
 #include "cub3d.h"
 
-char 	*split_lines(char *line, char *list)
+char		*split_lines(char *line, char *list)
 {
-	char *tmp;
+	char	*tmp;
 
 	tmp = list;
 	if (!(list = ft_strjoin(list, line)))
 		return (NULL);
 	free(tmp);
-	tmp = list;
-	if (!(list = ft_strjoin(list, "\n")))
-		return (NULL);
-	free(tmp);
+	tmp = NULL;
 	free(line);
-	return (list);
+	line = NULL;
+	if (!(line = ft_strjoin(list, "\n")))
+		return (NULL);
+	free(list);
+	list = NULL;
+	return (line);
 }

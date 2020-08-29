@@ -13,50 +13,30 @@
 #include <stdio.h>
 #include "cub3d.h"
 
-void 		all_len_sprites(t_data *img)
-{
-	t_sprites *head;
-
-	head = img->sprites;
-	while (head != NULL)
-	{
-		printf("%f\n", head->len);
-		head = head->next;
-	}
-}
-
 void		parse(t_data *img, char *filename)
 {
-	int fd;
-	char *line;
-	char *list;
+	int		fd;
+	char	*list;
 
-	if (!(fd = open(filename, O_RDONLY)))
-		printf("%d", fd); // !!!!!!!!!!!! need fix return (need return NULL!)
+	if ((fd = open(filename, O_RDONLY)) < 0)
+	{
+		ft_putstr_fd("Error:\nFile Does Not Exist\n", 1);
+		all_free(img);
+		exit(0);
+	}
 	list = ft_strdup("");
-	while (get_next_line(fd, &line))
-	{
-		if (check_flags_struct(img))
-			if (!(list = split_lines(line, list)))
-				img->map = NULL;
-		if (!(check_flags_struct(img)))
-			check_str(line, img);
-		if (img->flag.error)
-			errors(img);
-	}
-	if (!(list = split_lines(line, list)))
-		img->map = NULL;
+	list = read_file(img, fd, list);
 	close(fd);
+	valid_map(list, img);
 	if (!(img->map = ft_split(list, '\n')))
-	{
-		free_double_arr(img->map);
 		img->map = NULL;
-	}
-	img->flood_map = ft_split(list, '\n');
+	if (!(img->flood_map = ft_split(list, '\n')))
+		img->flood_map = NULL;
 	free(list);
+	list = NULL;
 }
 
-void	tracer(t_data *img)
+void		tracer(t_data *img)
 {
 	double horz_len;
 	double vert_len;
@@ -71,7 +51,7 @@ void	tracer(t_data *img)
 	clear_flags(img);
 }
 
-void	func(t_data *img)
+void		func(t_data *img)
 {
 	int count;
 
@@ -91,13 +71,27 @@ void	func(t_data *img)
 		img->player.ang_start += img->calc.ang_step;
 		count++;
 	}
-	sort_len_list(img);
-	move_sprite(img);
+	if (img->sprites != NULL)
+	{
+		sort_len_list(img);
+		move_sprite(img);
+	}
 	screenshot(img);
 	mlx_put_image_to_window(img->mlx, img->mlx_win, img->img, 0, 0);
 }
 
-int		main(int argc, char **argv)
+void		game(t_data *img)
+{
+	check_player_sight(img);
+	x_and_y_max(img);
+	flood_fill(img, img->vert, img->horz, '7');
+	errors(img);
+	free_double_arr(img->flood_map);
+	find_sprites(img);
+	func(img);
+}
+
+int			main(int argc, char **argv)
 {
 	t_data img;
 
@@ -116,14 +110,9 @@ int		main(int argc, char **argv)
 	get_textures(&img);
 	if (img.map == NULL)
 		return (0);
-	check_player_sight(&img);
-	x_and_y_max(&img);
-	flood_fill(&img, img.vert, img.horz, img.flood_map, '7');
-	errors(&img);
-	free_double_arr(img.flood_map);
-	find_sprites(&img);
-	func(&img);
+	game(&img);
 	mlx_hook(img.mlx_win, 2, 1L, &key, &img);
+	mlx_hook(img.mlx_win, 17, 0L, &close_window, &img);
 	mlx_loop(img.mlx);
 	return (0);
 }

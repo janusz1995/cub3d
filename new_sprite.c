@@ -12,9 +12,9 @@
 
 #include "cub3d.h"
 
-t_sprites 		*lstnew(int y, int x, int cube_size)
+t_sprites		*lstnew(int y, int x, int cube_size)
 {
-	t_sprites 	*list;
+	t_sprites	*list;
 
 	list = (t_sprites*)malloc(sizeof(t_sprites));
 	if (!list)

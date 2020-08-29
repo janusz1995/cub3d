@@ -12,10 +12,10 @@
 
 #include "cub3d.h"
 
-void 	check_max_and_min_screensize(t_data *img)
+void		check_max_and_min_screensize(t_data *img)
 {
-	int h;
-	int w;
+	int		h;
+	int		w;
 
 	mlx_get_screen_size(img->mlx, &w, &h);
 	if (img->height > h)

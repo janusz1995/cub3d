@@ -1,25 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   move_sprite_in_list.c                              :+:      :+:    :+:   */
+/*   valid_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: drina <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/25 15:32:11 by drina             #+#    #+#             */
-/*   Updated: 2020/08/25 15:32:13 by drina            ###   ########.fr       */
+/*   Created: 2020/08/26 15:52:47 by drina             #+#    #+#             */
+/*   Updated: 2020/08/26 15:52:50 by drina            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	move_sprite(t_data *img)
+void	valid_map(char *str, t_data *img)
 {
-	t_sprites	*save_head;
+	int		count;
+	int		i;
 
-	save_head = img->sprites;
-	while (save_head != NULL)
+	count = 0;
+	while (!(ft_isdigit(str[count])))
+		count++;
+	while (str[count])
 	{
-		draw_sprite(img, save_head);
-		save_head = save_head->next;
+		if (str[count] == '\n')
+		{
+			count++;
+			i = count;
+			while (str[i] == ' ')
+				i++;
+			if (str[i++] == '\n')
+			{
+				while (str[i] == '\n')
+					i++;
+				if (str[i] != '\0')
+					img->error.no_valid_map = 1;
+			}
+		}
+		count++;
 	}
 }

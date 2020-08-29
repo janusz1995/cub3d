@@ -44,7 +44,8 @@ void			get_textures(t_data *img)
 	img->sprite.txt = mlx_xpm_file_to_image(img->mlx,
 					img->path.sprite, &img->sprite.width, &img->sprite.height);
 	if (img->txt4.txt != NULL && img->txt3.txt != NULL
-		&& img->txt2.txt != NULL && img->txt1.txt != NULL)
+		&& img->txt2.txt != NULL && img->txt1.txt != NULL &&
+			img->sprite.txt != NULL)
 		get_addr_textures(img);
 	else
 		img->error.textures = 1;

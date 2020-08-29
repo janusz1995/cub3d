@@ -12,12 +12,13 @@
 
 #include "cub3d.h"
 
-double 		min_length(double horz, double vert, t_data *img)
+double		min_length(double horz, double vert, t_data *img)
 {
 	if (horz > vert)
 	{
 		img->calc.x_or_y = img->vert_y;
-		if (img->player.ang_start < M_PI + M_PI_2 && img->player.ang_start > M_PI_2)
+		if (img->player.ang_start < M_PI + M_PI_2 &&
+				img->player.ang_start > M_PI_2)
 			img->flag.west = 1;
 		else
 			img->flag.east = 1;

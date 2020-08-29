@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void 	all_free(t_data *img)
+void	all_free(t_data *img)
 {
 	free(img->map);
 	free(img->calc.arr_min_len_wall);

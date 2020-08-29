@@ -12,9 +12,9 @@
 
 #include "cub3d.h"
 
-void 	check_str(char *str, t_data *img)
+void	check_str(char *str, t_data *img)
 {
-	int count;
+	int		count;
 
 	count = 0;
 	while (str[count] == ' ')
@@ -25,8 +25,11 @@ void 	check_str(char *str, t_data *img)
 		str = NULL;
 	}
 	else
-	if (ft_isalpha(str[count]))
-		parse_line(img, &str[count]);
-	else
-		img->flag.error = 1;
+	{
+		if (ft_isalpha(str[count]))
+			parse_line(img, &str[count]);
+		else
+			img->flag.error = 1;
+	}
+	free(str);
 }

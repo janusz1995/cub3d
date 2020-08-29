@@ -14,8 +14,8 @@
 
 void	find_sprites(t_data *img)
 {
-	int 		i;
-	int 		j;
+	int		i;
+	int		j;
 
 	i = 0;
 	while (img->map[i])
@@ -25,7 +25,7 @@ void	find_sprites(t_data *img)
 		{
 			if (img->map[i][j] == '2')
 				add_back_sprite(img, (lstnew((i * img->cube_size),
-								 (j * img->cube_size), img->cube_size)));
+							(j * img->cube_size), img->cube_size)));
 			j++;
 		}
 		i++;

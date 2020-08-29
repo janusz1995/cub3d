@@ -12,11 +12,11 @@
 
 #include "cub3d.h"
 
-void 			sort_len_list(t_data *img)
+void			sort_len_list(t_data *img)
 {
 	t_sprites	*tmp;
 	int			flag;
-	
+
 	flag = 1;
 	while (flag)
 	{
@@ -35,11 +35,10 @@ void 			sort_len_list(t_data *img)
 	}
 }
 
-/// Swap 2 element in list
-
-void 		swap_two_sprites(t_sprites **head, t_sprites *one, t_sprites *two)
+void			swap_two_sprites(t_sprites **head,
+						t_sprites *one, t_sprites *two)
 {
-	t_sprites 	*tmp;
+	t_sprites	*tmp;
 	t_sprites	*root;
 
 	root = *head;

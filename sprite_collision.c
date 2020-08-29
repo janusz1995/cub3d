@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   move_sprite_in_list.c                              :+:      :+:    :+:   */
+/*   sprite_collision.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: drina <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/25 15:32:11 by drina             #+#    #+#             */
-/*   Updated: 2020/08/25 15:32:13 by drina            ###   ########.fr       */
+/*   Created: 2020/08/25 15:29:43 by drina             #+#    #+#             */
+/*   Updated: 2020/08/25 15:29:45 by drina            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	move_sprite(t_data *img)
+void		sprite_collision(t_data *img)
 {
-	t_sprites	*save_head;
+	t_sprites	*head;
+	t_sprites	*tmp;
 
-	save_head = img->sprites;
-	while (save_head != NULL)
+	tmp = img->sprites;
+	head = img->sprites;
+	while (head->next != NULL)
+		head = head->next;
+	while (tmp->next != head)
+		tmp = tmp->next;
+	if (head->x == img->player.x && head->y == img->player.y)
 	{
-		draw_sprite(img, save_head);
-		save_head = save_head->next;
+		free(head);
+		tmp->next = NULL;
 	}
 }

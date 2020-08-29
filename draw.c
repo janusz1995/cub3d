@@ -12,43 +12,48 @@
 
 #include "cub3d.h"
 
-int 	color_in_textures(t_data *img, double coef, int obj_start, int save)
+int		color_in_textures(t_data *img, double coef, int obj_start, int save)
 {
-	int color;
+	int		color;
+
 	if (img->flag.north == 1)
-		color = img->txt1.addr[(int)((obj_start - save) * coef) * img->txt1.width
-				+ ((int)(img->calc.x_or_y * 2) % img->txt1.width)];
+		color = img->txt1.addr[(int)((obj_start - save) * coef) *
+				img->txt1.width + ((int)(img->calc.x_or_y * 2) %
+				img->txt1.width)];
 	else if (img->flag.south == 1)
-		color = img->txt2.addr[(int)((obj_start - save) * coef) * img->txt2.width
-				+ (img->txt1.width - ((int)(img->calc.x_or_y * 2) % img->txt1.width))];
+		color = img->txt2.addr[(int)((obj_start - save) * coef) *
+				img->txt2.width + (img->txt1.width -
+				((int)(img->calc.x_or_y * 2) % img->txt1.width))];
 	else if (img->flag.east == 1)
-		color = img->txt3.addr[(int)((obj_start - save) * coef) * img->txt3.width
-				+ ((int)(img->calc.x_or_y * 2) % img->txt3.width)];
+		color = img->txt3.addr[(int)((obj_start - save) * coef) *
+				img->txt3.width + ((int)(img->calc.x_or_y * 2) %
+				img->txt3.width)];
 	else
-		color = img->txt4.addr[(int)((obj_start - save) * coef) * img->txt4.width
-				+ ((img->txt4.width - 1) - ((int)(img->calc.x_or_y * 2) % img->txt4.width))];
+		color = img->txt4.addr[(int)((obj_start - save) * coef) *
+				img->txt4.width + ((img->txt4.width - 1) -
+				((int)(img->calc.x_or_y * 2) % img->txt4.width))];
 	return (color);
 }
 
-void 	draw_floor(t_data *img, int obj_start)
+void	draw_floor(t_data *img, int obj_start)
 {
-	int floor;
+	int		floor;
 
 	floor = obj_start;
 	while (floor < img->height - 1)
 		my_mlx_pixel_put(img, img->pixel, floor++, img->color_floor);
 }
 
-void 	draw_sky(t_data *img, int obj_start)
+void	draw_sky(t_data *img, int obj_start)
 {
-	int sky;
+	int		sky;
 
 	sky = 0;
 	while (sky < obj_start)
 		my_mlx_pixel_put(img, img->pixel, sky++, img->color_sky);
 }
 
-void 	draw_wall(t_data *img)
+void	draw_wall(t_data *img)
 {
 	int		obj_h;
 	int		obj_start;

@@ -12,9 +12,9 @@
 
 #include "cub3d.h"
 
-int 		check_line(char *str)
+int		check_line(char *str)
 {
-	int 	count;
+	int	count;
 
 	count = 0;
 	while (str[count] != '\0')

@@ -14,7 +14,7 @@
 
 void	add_back_sprite(t_data *img, t_sprites *new)
 {
-	t_sprites 	*save_head;
+	t_sprites	*save_head;
 
 	save_head = img->sprites;
 	if (save_head == NULL)
