@@ -61,9 +61,9 @@ void	fill_color(char *str, int *color, t_data *img, int *flag)
 		str++;
 	tmp = ft_split(str, ',');
 	if (check_num_lines(tmp, 3) != 1 ||
-		ft_atoi(tmp[0]) < 0 || ft_atoi(tmp[0]) > 225 ||
-		ft_atoi(tmp[1]) < 0 || ft_atoi(tmp[1]) > 225 ||
-		ft_atoi(tmp[2]) < 0 || ft_atoi(tmp[2]) > 225)
+		ft_atoi(tmp[0]) < 0 || ft_atoi(tmp[0]) > 255 ||
+		ft_atoi(tmp[1]) < 0 || ft_atoi(tmp[1]) > 255 ||
+		ft_atoi(tmp[2]) < 0 || ft_atoi(tmp[2]) > 255)
 		img->error.no_valid_color = 1;
 	else if (check_num_lines(tmp, 3) == 1 && check_line(tmp[0]) &&
 			check_line(tmp[1]) && check_line(tmp[2]) && !(*flag))

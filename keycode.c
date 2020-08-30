@@ -15,70 +15,48 @@
 static	void	up(t_data *img)
 {
 	if (img->map[(unsigned int)(img->player.y +
-            20 * sin(img->player.angle)) / img->cube_size]
-			[(unsigned int)img->player.x / img->cube_size] != '1')
+		10 * sin(img->player.angle)) / img->cube_size]
+		[(unsigned int)img->player.x / img->cube_size] != '1')
 		img->player.y += 5 * sin(img->player.angle);
 	if (img->map[(unsigned int)img->player.y / img->cube_size]
 		[(unsigned int)(img->player.x +
-                    20 * cos(img->player.angle)) / img->cube_size] != '1')
+		10 * cos(img->player.angle)) / img->cube_size] != '1')
 		img->player.x += 5 * cos(img->player.angle);
 }
 
 static	void	down(t_data *img)
 {
 	if (img->map[(unsigned int)(img->player.y -
-            20 * sin(img->player.angle)) / img->cube_size]
+		10 * sin(img->player.angle)) / img->cube_size]
 		[(unsigned int)img->player.x / img->cube_size] != '1')
 		img->player.y -= 5 * sin(img->player.angle);
 	if (img->map[(unsigned int)img->player.y / img->cube_size]
 		[(unsigned int)(img->player.x -
-                    20 * cos(img->player.angle)) / img->cube_size] != '1')
+		10 * cos(img->player.angle)) / img->cube_size] != '1')
 		img->player.x -= 5 * cos(img->player.angle);
 }
 
 static	void	right(t_data *img)
 {
-//	 if (img->map[(unsigned int)(img->player.y / img->cube_size)]
-//	 	[(unsigned int)(img->player.x - 20 * sin(img->player.angle)
-//	 	/ img->cube_size)] == '1' || img->map[(unsigned int)(img->player.y +
-//             20 * cos(img->player.angle)) / img->cube_size]
-//	 	[(unsigned int)img->player.x / img->cube_size] == '1')
-//	 	return ;
-//	 if (img->map[(unsigned int)(img->player.y / img->cube_size)]
-//	 	[(unsigned int)(img->player.x -
-//                     20 * sin(img->player.angle) / img->cube_size)] != '1')
-//	 	img->player.x -= 5 * sin(img->player.angle);
-//	 if (img->map[(unsigned int)(img->player.y +
-//             20 * cos(img->player.angle)) / img->cube_size]
-//	 	[(unsigned int)img->player.x / img->cube_size] != '1')
-//	 	img->player.y += 5 * cos(img->player.angle);
-
-
-	if ((img->map[(unsigned int)(img->player.y + (5 + 3) *
-		cos(img->player.angle)) >> 6u][(unsigned int)
-		(img->player.x) >> 6u]) != '1')
-			img->player.y += 5 * cos(img->player.angle);
-		if ((img->map[(unsigned int)(img->player.y) >> 6u]
-		[(unsigned int)(img->player.x - (5 + 3) * sin(img->player.angle))
-		>> 6u]) != '1')
-			img->player.x -= 5 * sin(img->player.angle);
+	if (img->map[(unsigned int)(img->player.y / img->cube_size)]
+		[(unsigned int)(img->player.x -
+		10 * sin(img->player.angle)) / img->cube_size] != '1')
+		img->player.x -= 5 * sin(img->player.angle);
+	if (img->map[(unsigned int)(img->player.y +
+		10 * cos(img->player.angle)) / img->cube_size]
+		[(unsigned int)img->player.x / img->cube_size] != '1')
+		img->player.y += 5 * cos(img->player.angle);
 }
 
 static	void	left(t_data *img)
 {
-//	if (img->map[(unsigned int)(img->player.y / img->cube_size)]
-//		[(unsigned int)(img->player.x + 50 * sin(img->player.angle)
-//		/ img->cube_size)] == '1' || img->map[(unsigned int)(img->player.y -
-//            50 * cos(img->player.angle)) / img->cube_size]
-//		[(unsigned int)(img->player.x / img->cube_size)] == '1')
-////		return ;
-//	if (img->map[(unsigned int)(img->player.y / img->cube_size)]
-//		[(unsigned int)(img->player.x +
-//		20 * sin(img->player.angle) / img->cube_size)] != '1')
+	if (img->map[(unsigned int)(img->player.y / img->cube_size)]
+		[(unsigned int)(img->player.x +
+		10 * sin(img->player.angle)) / img->cube_size] != '1')
 		img->player.x += 5 * sin(img->player.angle);
-//	if (img->map[(unsigned int)(img->player.y -
-//	    20 * cos(img->player.angle)) / img->cube_size]
-//		[(unsigned int)(img->player.x / img->cube_size)] != '1')
+	if (img->map[(unsigned int)(img->player.y -
+		10 * cos(img->player.angle)) / img->cube_size]
+		[(unsigned int)(img->player.x / img->cube_size)] != '1')
 		img->player.y -= 5 * cos(img->player.angle);
 }
 
